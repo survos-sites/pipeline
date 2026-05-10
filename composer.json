@@ -20,6 +20,7 @@
         "symfony/process": "^8.0",
         "symfony/runtime": "^8.0",
         "symfony/twig-bundle": "^8.0",
+        "symfony/ux-twig-component": "^3.0",
         "symfony/yaml": "^8.0",
         "twig/extra-bundle": "^3.0",
         "twig/twig": "^3.0"
