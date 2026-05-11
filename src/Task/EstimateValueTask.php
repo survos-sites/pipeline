@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace App\Task;
 
-use Survos\AiPipelineBundle\Task\AbstractVisionTask;
+use Survos\AiWorkflowBundle\Task\AbstractVisionTask;
 use Symfony\AI\Agent\AgentInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Twig\Environment as TwigEnvironment;
 
 /**
@@ -14,7 +15,7 @@ use Twig\Environment as TwigEnvironment;
  * Estimates the approximate collector/auction value of an item based on
  * its description, classification, and visible condition.
  *
- * Prompt template: templates/bundles/SurvosAiPipelineBundle/prompt/estimate_value/
+ * Prompt template: templates/bundles/SurvosAiWorkflowBundle/prompt/estimate_value/
  * (Note: this task uses its own template directory, not an override.)
  *
  * To add to a pipeline entry in images.json:
@@ -26,8 +27,9 @@ final class EstimateValueTask extends AbstractVisionTask
         #[Autowire(service: 'ai.agent.metadata')]
         AgentInterface $agent,
         TwigEnvironment $twig,
+        HttpClientInterface $httpClient,
     ) {
-        parent::__construct($agent, $twig);
+        parent::__construct($agent, $twig, $httpClient);
     }
 
     public function getTask(): string

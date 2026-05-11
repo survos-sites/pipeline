@@ -24,3 +24,8 @@
 
 # Generated PDF page images — built locally or in CI
 /public/images/pages/
+
+###> symfony/asset-mapper ###
+/public/assets/
+/assets/vendor/
+###< symfony/asset-mapper ###

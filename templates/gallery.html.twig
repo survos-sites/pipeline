@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Gallery{% endblock %}
+{% block page_subtitle %}Plain image workflow subjects imported from the gallery manifest.{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Images</h3>
+            <div class="card-actions">
+                <span class="badge bg-blue-lt">{{ images|length }} records</span>
+            </div>
+        </div>
+        <div class="card-body">
+            <twig:simple_datatables
+                :data="images"
+                :columns="[
+                    {name: 'title', title: 'Title'},
+                    {name: 'collection', title: 'Collection'},
+                    {name: 'marking', title: 'Place'},
+                    {name: 'workflowQueue', title: 'Queued Tasks'}
+                ]"
+                :perPage="25"
+                tableClasses="card-table"
+            />
+        </div>
+    </div>
+
+    <div class="row row-cards mt-3">
+        {% for image in images %}
+            <div class="col-sm-6 col-lg-4">
+                <div class="card">
+                    <div class="img-responsive img-responsive-4x3 card-img-top" style="background-image: url('{{ image.displayUrl }}')"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">{{ image.title }}</h3>
+                        <div class="text-secondary">{{ image.collection ?? 'Uncollected' }}</div>
+                        <div class="mt-2">
+                            <span class="badge bg-blue-lt">{{ image.marking }}</span>
+                            {% if image.workflowQueue %}
+                                <span class="badge bg-yellow-lt">{{ image.workflowQueue|length }} queued</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

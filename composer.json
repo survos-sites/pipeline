@@ -1,6 +1,6 @@
 {
-    "name": "survos/ai-pipeline-demo",
-    "description": "Demo app for survos/ai-pipeline-bundle — runs AI pipelines and publishes results to GitHub Pages",
+    "name": "survos/ai-workflow",
+    "description": "Demo app for survos/ai-workflow-bundle — runs AI workflow and tasks",
     "type": "project",
     "license": "MIT",
     "minimum-stability": "dev",
@@ -9,27 +9,66 @@
         "php": "^8.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "survos/ai-pipeline-bundle": "^2.0",
-        "symfony/ai-agent": "*",
+        "api-platform/doctrine-orm": "^4.3",
+        "api-platform/symfony": "^4.3",
+        "doctrine/doctrine-bundle": "^3.2",
+        "doctrine/doctrine-migrations-bundle": "^4.0",
+        "doctrine/orm": "^3.6",
+        "nelmio/cors-bundle": "^2.6",
+        "phpdocumentor/reflection-docblock": "^5.6",
+        "phpstan/phpdoc-parser": "^2.3",
+        "survos/ai-workflow-bundle": "*",
+        "survos/field-bundle": "*",
+        "survos/simple-datatables-bundle": "*",
+        "survos/state-bundle": "^2.1",
+        "survos/tabler-bundle": "^2.1",
+        "symfony/ai-agent": "^0.8",
+        "symfony/ai-bundle": "^0.8",
+        "symfony/ai-mistral-platform": "^0.8",
+        "symfony/ai-open-ai-platform": "^0.8",
+        "symfony/ai-platform": "^0.8",
+        "symfony/asset": "^8.0",
+        "symfony/asset-mapper": "^8.0",
         "symfony/console": "^8.0",
+        "symfony/doctrine-messenger": "^8.0",
         "symfony/dotenv": "^8.0",
+        "symfony/expression-language": "^8.0",
         "symfony/flex": "^2",
+        "symfony/form": "^8.0",
         "symfony/framework-bundle": "^8.0",
         "symfony/http-client": "^8.0",
+        "symfony/intl": "^8.0",
+        "symfony/mailer": "^8.0",
+        "symfony/mime": "^8.0",
         "symfony/monolog-bundle": "^4.0",
+        "symfony/notifier": "^8.0",
         "symfony/process": "^8.0",
+        "symfony/property-access": "^8.0",
+        "symfony/property-info": "^8.0",
         "symfony/runtime": "^8.0",
+        "symfony/security-bundle": "^8.0",
+        "symfony/serializer": "^8.0",
+        "symfony/stimulus-bundle": "^3.0",
+        "symfony/string": "^8.0",
+        "symfony/translation": "^8.0",
         "symfony/twig-bundle": "^8.0",
+        "symfony/ux-turbo": "^3.0",
         "symfony/ux-twig-component": "^3.0",
+        "symfony/validator": "^8.0",
+        "symfony/web-link": "^8.0",
         "symfony/yaml": "^8.0",
         "twig/extra-bundle": "^3.0",
         "twig/twig": "^3.0"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest",
         "phpunit/phpunit": "^13.0",
+        "roave/security-advisories": "dev-latest",
+        "survos/deployment-bundle": "*",
+        "symfony/browser-kit": "^8.0",
+        "symfony/css-selector": "^8.0",
         "symfony/debug-bundle": "^8.0",
         "symfony/maker-bundle": "^1.0",
+        "symfony/stopwatch": "^8.0",
         "symfony/web-profiler-bundle": "^8.0"
     },
     "config": {
@@ -64,10 +103,18 @@
     },
     "scripts": {
         "auto-scripts": {
-            "cache:clear": "symfony-cmd"
+            "importmap:install": "symfony-cmd",
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
-        "post-install-cmd": ["@auto-scripts"],
-        "post-update-cmd": ["@auto-scripts"]
+        "post-install-cmd": [
+            "php -d memory_limit=512M bin/console cache:clear",
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "php -d memory_limit=512M bin/console cache:clear",
+            "@auto-scripts"
+        ]
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -76,6 +123,12 @@
         "symfony": {
             "allow-contrib": false,
             "require": "^8.0"
+        }
+    },
+    "repositories": {
+        "survos_simple_datatables": {
+            "type": "path",
+            "url": "../mono/bu/simple-datatables-bundle"
         }
     }
 }

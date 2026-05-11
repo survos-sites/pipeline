@@ -1,0 +1,35 @@
+{
+    "name": "ai-demo",
+    "description": "Demo app for survos/ai-pipeline-bundle — runs AI pipelines and publishes results to GitHub Pages",
+    "keywords": [
+        "php",
+        "symfony"
+    ],
+    "repository": "https://github.com/survos/ai-pipeline-demo",
+    "scripts": {
+        "dokku": {
+            "predeploy": "bin/console importmap:install && bin/console asset-map:compile && bin/console  secrets:decrypt-to-local --force && bin/console doctrine:migrations:migrate -n --allow-no-migration",
+            "postdeploy": "bin/console about"
+        }
+    },
+    "env": {
+        "SECRET_TOKEN": {
+            "description": "A secret key for verifying the integrity of signed cookies.",
+            "value": "secret"
+        },
+        "WEB_CONCURRENCY": {
+            "description": "The number of processes to run.",
+            "generator": "echo 5"
+        }
+    },
+    "image": "gliderlabs/herokuish",
+    "addons": [
+        "dokku-postgres",
+        "dokku-redis"
+    ],
+    "buildpacks": [
+        {
+            "url": "https://github.com/heroku/heroku-buildpack-php.git"
+        }
+    ]
+}

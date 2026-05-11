@@ -13,7 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
-use Survos\AiPipelineBundle\Task\AiTaskRegistry;
+use Survos\AiWorkflowBundle\Task\TaskRegistry;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
@@ -76,7 +76,7 @@ final class AddDocumentCommand extends Command
 
     public function __construct(
         private readonly HttpClientInterface $httpClient,
-        private readonly AiTaskRegistry $registry,
+        private readonly TaskRegistry $registry,
         #[Autowire('%kernel.project_dir%/public/data')]
         private readonly string $dataDir,
     ) {

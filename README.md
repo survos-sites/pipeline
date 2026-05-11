@@ -47,7 +47,7 @@ config/packages/
 └── survos_ai_pipeline.yaml ← bundle config (store_dir, disabled_tasks)
 
 templates/
-├── bundles/SurvosAiPipelineBundle/prompt/
+├── bundles/SurvosAiWorkflowBundle/prompt/
 │   └── keywords/           ← overridden keywords prompt (collectibles focus)
 └── ai/prompt/
     └── estimate_value/     ← custom task prompt templates
@@ -152,6 +152,22 @@ bin/console app:process --limit=1
 
 # Override tasks for all entries
 bin/console app:process --tasks=ocr_mistral,classify
+```
+
+### `app:object-not-found-error` — Symfony AI image reproducer
+
+This minimal command exercises the same shape that exposed the Symfony AI
+`Object not found` failure: a public image URL sent as `ImageUrl` plus a
+structured `response_format` DTO from `survos/ai-pipeline-bundle`.
+
+```bash
+bin/console app:object-not-found-error
+```
+
+To test another public image URL:
+
+```bash
+bin/console app:object-not-found-error 'https://example.com/image.jpg'
 ```
 
 ---
@@ -351,7 +367,7 @@ All task results are shown with token usage pills, done/failed badges, and colla
 
 This repo is an example consumer of [`survos/ai-pipeline-bundle`](https://github.com/survos/ai-pipeline-bundle). The bundle provides:
 
-- `AiTaskInterface`, `AiTaskRegistry`, `AiPipelineRunner`
+- `AiTaskInterface`, `TaskRegistry`, `AiPipelineRunner`
 - 14 built-in tasks (OCR, classify, describe, extract, summarize, etc.)
 - `JsonFileResultStore` / `ArrayResultStore`
 - `ai:pipeline:run` and `ai:pipeline:tasks` CLI commands

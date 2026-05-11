@@ -1,0 +1,16 @@
+survos_tabler:
+    app:
+        code: ai-pipeline-demo
+        title: AI Workflow Demo
+        description: Real-image and real-AI task demos for Survos AI Workflow.
+        abbr: AI<b>Workflow</b>
+        homepage_route: app_homepage
+        header:
+            auth:
+                enabled: false
+    routes:
+        home: app_homepage
+    options:
+        layout: horizontal
+    debug:
+        menu_slots: false
