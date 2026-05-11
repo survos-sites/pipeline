@@ -106,7 +106,10 @@
                             <a href="#tags" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab">Tags</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a href="#claims" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab">AI Claims</a>
+                            <a href="#claims-observe" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab">Observe</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a href="#claims-analyze" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab">Analyze</a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a href="#workflow" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab">
@@ -132,10 +135,18 @@
                                 layout="chips"
                             />
                         </div>
-                        <div class="tab-pane" id="claims" role="tabpanel">
+                        <div class="tab-pane" id="claims-observe" role="tabpanel">
                             <twig:AiClaimsList
                                 subjectType="{{ claimSubjectType }}"
                                 subjectId="{{ claimSubjectId }}"
+                                sources="observe@1.0"
+                            />
+                        </div>
+                        <div class="tab-pane" id="claims-analyze" role="tabpanel">
+                            <twig:AiClaimsList
+                                subjectType="{{ claimSubjectType }}"
+                                subjectId="{{ claimSubjectId }}"
+                                sources="analyze@1.0"
                                 excludePredicates="ai:ocrText,ai:htrText,ai:printedText"
                             />
                         </div>

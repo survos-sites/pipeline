@@ -6,7 +6,7 @@ namespace App\Workflow;
 
 use App\Entity\GalleryImage;
 use Doctrine\ORM\EntityManagerInterface;
-use Survos\AiWorkflowBundle\Task\EnrichFromThumbnailTask;
+use Survos\AiWorkflowBundle\Task\ObserveTask;
 use Survos\AiWorkflowBundle\Task\TaskRunner;
 use Survos\AiWorkflowBundle\Workflow\SubjectFlow;
 use Symfony\Component\Workflow\Attribute\AsTransitionListener;
@@ -24,7 +24,7 @@ final class GalleryWorkflow
     public function onPrepare(TransitionEvent $event): void
     {
         $image = $this->getImage($event);
-        $image->addPendingStep(EnrichFromThumbnailTask::TASK);
+        $image->addPendingStep(ObserveTask::TASK);
 
         $this->entityManager->persist($image);
         $this->entityManager->flush();
