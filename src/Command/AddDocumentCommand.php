@@ -13,7 +13,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
+use Survos\AiWorkflowBundle\Task\AnnotateHandwritingTask;
+use Survos\AiWorkflowBundle\Task\ExtractMetadataTask;
+use Survos\AiWorkflowBundle\Task\GenerateTitleTask;
+use Survos\AiWorkflowBundle\Task\OcrMistralTask;
+use Survos\AiWorkflowBundle\Task\SummarizeTask;
 use Survos\AiWorkflowBundle\Task\TaskRegistry;
+use Survos\AiWorkflowBundle\Task\TranscribeHandwritingTask;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
@@ -41,36 +47,36 @@ final class AddDocumentCommand extends Command
     /** Pipeline presets — user picks one of these */
     private const PIPELINES = [
         'handwritten_document' => [
-            'ocr_mistral',
-            'annotate_handwriting',
-            'transcribe_handwriting',
+            OcrMistralTask::TASK,
+            AnnotateHandwritingTask::TASK,
+            TranscribeHandwritingTask::TASK,
             'people_and_places',
-            'extract_metadata',
-            'generate_title',
+            ExtractMetadataTask::TASK,
+            GenerateTitleTask::TASK,
         ],
         'printed_document' => [
-            'ocr_mistral',
+            OcrMistralTask::TASK,
             'classify',
-            'extract_metadata',
-            'summarize',
+            ExtractMetadataTask::TASK,
+            SummarizeTask::TASK,
             'keywords',
         ],
         'photograph_or_card' => [
-            'ocr_mistral',
+            OcrMistralTask::TASK,
             'classify',
             'basic_description',
             'keywords',
         ],
         'full_analysis' => [
-            'ocr_mistral',
+            OcrMistralTask::TASK,
             'classify',
-            'summarize',
+            SummarizeTask::TASK,
             'keywords',
-            'transcribe_handwriting',
-            'annotate_handwriting',
+            TranscribeHandwritingTask::TASK,
+            AnnotateHandwritingTask::TASK,
             'people_and_places',
-            'extract_metadata',
-            'generate_title',
+            ExtractMetadataTask::TASK,
+            GenerateTitleTask::TASK,
         ],
     ];
 

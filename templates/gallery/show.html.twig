@@ -1,0 +1,156 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ image.title }}{% endblock %}
+{% block page_subtitle %}
+    <span class="font-monospace">{{ image.code }}</span>
+    {% if image.collection %}
+        <span class="mx-2">·</span>{{ image.collection }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="row g-4">
+        <div class="col-12 col-lg-5">
+            <div class="card">
+                <div class="card-body p-0">
+                    <a href="{{ image.displayUrl }}" target="_blank" rel="noopener">
+                        <img src="{{ image.displayUrl }}"
+                             alt="{{ image.title }}"
+                             class="img-fluid w-100 d-block"
+                             style="max-height:560px; object-fit:contain; background:#111;"
+                             loading="lazy">
+                    </a>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <div class="d-flex gap-2 flex-wrap">
+                        <span class="badge bg-blue-lt">{{ image.marking }}</span>
+                        {% if image.pendingCount > 0 %}
+                            <span class="badge bg-yellow-lt">{{ image.pendingCount }} pending</span>
+                        {% else %}
+                            <span class="badge bg-green-lt">queue empty</span>
+                        {% endif %}
+                    </div>
+                    <a href="{{ image.displayUrl }}" target="_blank" rel="noopener" class="small">Open source</a>
+                    <a href="{{ path('survos_state_debug_transitions', {globalKey: 'APP_ENTITY_GALLERY_IMAGE', workflowCode: 'ai_subject', redirectUrl: app.request.uri}|merge(image.erp)) }}"
+                       class="btn btn-sm btn-outline-secondary" title="Debug transitions">
+                        {{ ux_icon('mdi:state-machine') }}
+                    </a>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h3 class="card-title">Record</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-sm mb-0">
+                        <tbody>
+                        <tr>
+                            <th class="text-secondary fw-normal ps-3" style="width:34%">Code</th>
+                            <td class="font-monospace">{{ image.code }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-secondary fw-normal ps-3">Title</th>
+                            <td>{{ image.title }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-secondary fw-normal ps-3">Collection</th>
+                            <td>{{ image.collection ?? '—' }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-secondary fw-normal ps-3">Source URL</th>
+                            <td class="text-break"><a href="{{ image.displayUrl }}" target="_blank" rel="noopener">{{ image.sourceUrl }}</a></td>
+                        </tr>
+                        <tr>
+                            <th class="text-secondary fw-normal ps-3">Local AI file</th>
+                            <td class="text-break font-monospace small">{{ image.localOriginalPath ?? '—' }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-secondary fw-normal ps-3">Pending steps</th>
+                            <td>
+                                {% if image.pendingCount > 0 %}
+                                    {% for step in image.pendingSteps %}
+                                        <span class="badge bg-yellow-lt font-monospace">{{ step }}</span>
+                                    {% endfor %}
+                                {% else %}
+                                    <span class="text-secondary">empty</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h3 class="card-title">Manifest Row</h3>
+                </div>
+                <div class="card-body">
+                    <pre class="mb-0 small" style="white-space:pre-wrap; max-height:360px; overflow:auto;">{{ image.legacy|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-7">
+            <div class="card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a href="#text" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab">Text</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a href="#summary" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab">Summary</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a href="#tags" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab">Tags</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a href="#claims" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab">AI Claims</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a href="#workflow" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab">
+                                Workflow
+                                <span class="badge text-bg-{{ image.marking == 'new' ? 'secondary' : 'primary' }} ms-1 font-monospace small">{{ image.marking }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active show" id="text" role="tabpanel">
+                            <twig:AiOcrPanel subjectType="{{ claimSubjectType }}" subjectId="{{ claimSubjectId }}"/>
+                        </div>
+                        <div class="tab-pane" id="summary" role="tabpanel">
+                            <twig:AiClaimsSummary subjectType="{{ claimSubjectType }}" subjectId="{{ claimSubjectId }}"/>
+                        </div>
+                        <div class="tab-pane" id="tags" role="tabpanel">
+                            <twig:AiClaimsList
+                                subjectType="{{ claimSubjectType }}"
+                                subjectId="{{ claimSubjectId }}"
+                                predicates="dcterms:subject,foaf:Person,dcterms:spatial,ai:speculation,ai:organisation,dcterms:type,ai:highResGoal,ai:highResTarget"
+                                layout="chips"
+                            />
+                        </div>
+                        <div class="tab-pane" id="claims" role="tabpanel">
+                            <twig:AiClaimsList
+                                subjectType="{{ claimSubjectType }}"
+                                subjectId="{{ claimSubjectId }}"
+                                excludePredicates="ai:ocrText,ai:htrText,ai:printedText"
+                            />
+                        </div>
+                        <div class="tab-pane" id="workflow" role="tabpanel">
+                            <twig:state:workflow-marking
+                                subject="{{ image }}"
+                                globalKey="APP_ENTITY_GALLERY_IMAGE"
+                                workflowCode="ai_subject"
+                                redirectUrl="{{ app.request.uri }}"
+                                layout="table"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

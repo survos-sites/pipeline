@@ -3,10 +3,10 @@
 {% block page_title %}Gallery{% endblock %}
 {% block page_subtitle %}Plain image workflow subjects imported from the gallery manifest.{% endblock %}
 
-{% block content %}
+{% block body %}
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Images</h3>
+            <h3 class="card-title">{{ images|length  }} Images</h3>
             <div class="card-actions">
                 <span class="badge bg-blue-lt">{{ images|length }} records</span>
             </div>
@@ -18,10 +18,9 @@
                     {name: 'title', title: 'Title'},
                     {name: 'collection', title: 'Collection'},
                     {name: 'marking', title: 'Place'},
-                    {name: 'workflowQueue', title: 'Queued Tasks'}
+                    {name: 'pendingSteps', title: 'Pending Steps'}
                 ]"
                 :perPage="25"
-                tableClasses="card-table"
             />
         </div>
     </div>
@@ -30,14 +29,18 @@
         {% for image in images %}
             <div class="col-sm-6 col-lg-4">
                 <div class="card">
-                    <div class="img-responsive img-responsive-4x3 card-img-top" style="background-image: url('{{ image.displayUrl }}')"></div>
+                    <a href="{{ path('app_gallery_show', image.rp) }}" class="d-block">
+                        <div class="img-responsive img-responsive-4x3 card-img-top" style="background-image: url('{{ image.displayUrl }}')"></div>
+                    </a>
                     <div class="card-body">
-                        <h3 class="card-title">{{ image.title }}</h3>
+                        <h3 class="card-title">
+                            <a href="{{ path('app_gallery_show', image.rp) }}" class="text-reset">{{ image.title }}</a>
+                        </h3>
                         <div class="text-secondary">{{ image.collection ?? 'Uncollected' }}</div>
                         <div class="mt-2">
                             <span class="badge bg-blue-lt">{{ image.marking }}</span>
-                            {% if image.workflowQueue %}
-                                <span class="badge bg-yellow-lt">{{ image.workflowQueue|length }} queued</span>
+                            {% if image.pendingCount > 0 %}
+                                <span class="badge bg-yellow-lt">{{ image.pendingCount }} pending</span>
                             {% endif %}
                         </div>
                     </div>

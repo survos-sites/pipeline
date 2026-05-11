@@ -12,6 +12,10 @@ use Survos\AiWorkflowBundle\Contract\ImageSubjectInterface;
 use Survos\AiWorkflowBundle\Contract\WorkflowSubjectInterface;
 use Survos\AiWorkflowBundle\Workflow\SubjectFlow;
 use Survos\FieldBundle\Attribute\EntityMeta;
+use Survos\FieldBundle\Attribute\RouteIdentity;
+use Survos\FieldBundle\Entity\RouteIdentityTrait;
+use Survos\StateBundle\Traits\MarkingInterface;
+use Survos\StateBundle\Traits\MarkingTrait;
 
 #[ORM\Entity(repositoryClass: GalleryImageRepository::class)]
 #[EntityMeta(
@@ -20,8 +24,12 @@ use Survos\FieldBundle\Attribute\EntityMeta;
     label: 'Gallery Images',
     description: 'Plain image records imported from the gallery manifest.',
 )]
-class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, ContextSubjectInterface
+#[RouteIdentity(field: 'code')]
+class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, ContextSubjectInterface, MarkingInterface
 {
+    use MarkingTrait;
+    use RouteIdentityTrait;
+
     #[ORM\Id]
     #[ORM\Column(length: 16)]
     public string $code;
@@ -35,14 +43,9 @@ class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, C
     #[ORM\Column(length: 255, nullable: true)]
     public ?string $collection = null;
 
-    #[ORM\Column(length: 32)]
-    public string $marking = SubjectFlow::PLACE_NEW;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    public ?string $localOriginalPath = null;
 
-    /**
-     * @var list<string>
-     */
-    #[ORM\Column(type: Types::JSON)]
-    public array $workflowQueue = [];
 
     #[ORM\Column]
     public bool $workflowLocked = false;
@@ -54,6 +57,11 @@ class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, C
      */
     #[ORM\Column(type: Types::JSON)]
     public array $legacy = [];
+
+    public function __construct()
+    {
+        $this->marking = SubjectFlow::PLACE_NEW;
+    }
 
     public static function fromManifestRow(array $row): self
     {
@@ -82,16 +90,6 @@ class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, C
         return null;
     }
 
-    public function getWorkflowQueue(): array
-    {
-        return $this->workflowQueue;
-    }
-
-    public function setWorkflowQueue(array $queue): void
-    {
-        $this->workflowQueue = array_values($queue);
-    }
-
     public function isWorkflowLocked(): bool
     {
         return $this->workflowLocked;
@@ -104,6 +102,10 @@ class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, C
 
     public function getWorkflowImageUrl(): ?string
     {
+        if ($this->localOriginalPath && is_file($this->localOriginalPath)) {
+            return 'file://' . $this->localOriginalPath;
+        }
+
         return $this->sourceUrl ?: null;
     }
 
@@ -112,7 +114,9 @@ class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, C
         return [
             'title' => $this->title,
             'collection' => $this->collection,
-            'legacy' => $this->legacy,
+            'local_file_url' => $this->localOriginalPath && is_file($this->localOriginalPath)
+                ? 'file://' . $this->localOriginalPath
+                : null,
         ];
     }
 

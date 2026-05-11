@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\GalleryImage;
 use App\Repository\GalleryImageRepository;
 use Survos\FieldBundle\Attribute\RouteMeta;
 use Survos\FieldBundle\Enum\Audience;
@@ -28,6 +29,24 @@ final class GalleryController extends AbstractController
     {
         return [
             'images' => $images->findBy([], ['title' => 'ASC']),
+        ];
+    }
+
+    #[Route('/gallery/{galleryImageId}', name: 'app_gallery_show')]
+    #[RouteMeta(
+        description: 'Display a gallery image workflow subject with AI claims.',
+        purpose: Purpose::Show,
+        label: 'Gallery Image',
+        audience: Audience::Public,
+        sitemap: false,
+    )]
+    #[Template('gallery/show.html.twig')]
+    public function show(GalleryImage $image): array
+    {
+        return [
+            'image' => $image,
+            'claimSubjectType' => GalleryImage::class,
+            'claimSubjectId' => $image->code,
         ];
     }
 }

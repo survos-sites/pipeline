@@ -11,8 +11,6 @@ ai:
         ocr:
             platform: 'ai.platform.openai'
             model: 'gpt-4o'
-            prompt:
-                text: 'You are an expert OCR engine. Return structured JSON only.'
             tools: false
 
         # Vision + OCR for handwriting/historical documents
@@ -22,30 +20,22 @@ ai:
         mistral_vision:
             platform: 'ai.platform.openai'
             model: 'gpt-4o'
-            prompt:
-                text: 'You are an expert at reading historical documents, handwriting, and complex page layouts. Return structured JSON only.'
             tools: false
 
         # Classification — cheap model is fine
         classify:
             platform: 'ai.platform.openai'
             model: 'gpt-4o-mini'
-            prompt:
-                text: 'You are an expert document classifier. Return structured JSON only.'
             tools: false
 
         # Visual description
         description:
             platform: 'ai.platform.openai'
             model: 'gpt-4o-mini'
-            prompt:
-                text: 'You are a museum archivist generating visual descriptions. Return structured JSON only.'
             tools: false
 
         # Metadata extraction, NER, title, summarize
         metadata:
             platform: 'ai.platform.openai'
             model: 'gpt-4o-mini'
-            prompt:
-                text: 'You are a specialist archivist extracting structured metadata. Return structured JSON only.'
             tools: false

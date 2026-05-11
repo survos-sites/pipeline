@@ -6,7 +6,9 @@ namespace App\Command;
 
 use App\Entity\GalleryImage;
 use App\Repository\GalleryImageRepository;
+use App\Service\GalleryImageCache;
 use Doctrine\ORM\EntityManagerInterface;
+use Survos\AiWorkflowBundle\Task\EnrichFromThumbnailTask;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Attribute\Option;
@@ -20,6 +22,7 @@ final class ImportGalleryCommand
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly GalleryImageRepository $images,
+        private readonly GalleryImageCache $imageCache,
         #[Autowire('%kernel.project_dir%')]
         private readonly string $projectDir,
     ) {
@@ -29,6 +32,7 @@ final class ImportGalleryCommand
         SymfonyStyle $io,
         #[Argument('manifest path, relative to project root')] string $manifest = 'public/data/images.json',
         #[Option('replace current workflow queues with the default observe task queue')] bool $queue = false,
+        #[Option('skip caching source images locally for AI tools')] bool $skipDownload = false,
     ): int {
         $path = str_starts_with($manifest, '/') ? $manifest : $this->projectDir . '/' . $manifest;
         if (!is_file($path)) {
@@ -46,6 +50,8 @@ final class ImportGalleryCommand
 
         $created = 0;
         $updated = 0;
+        $cached = 0;
+        $cacheFailures = 0;
         foreach ($rows as $row) {
             if (!is_array($row) || !isset($row['url'])) {
                 continue;
@@ -63,13 +69,30 @@ final class ImportGalleryCommand
             }
 
             if ($queue) {
-                $image->setWorkflowQueue(['enrich_from_thumbnail']);
+                $image->addPendingStep(EnrichFromThumbnailTask::TASK);
+            }
+
+            if (!$skipDownload) {
+                try {
+                    $this->imageCache->cacheOriginal($image);
+                    ++$cached;
+                } catch (\RuntimeException $e) {
+                    ++$cacheFailures;
+                    $io->warning(sprintf('Could not cache %s: %s', $image->code, $e->getMessage()));
+                }
             }
         }
 
         $this->em->flush();
 
-        $io->success(sprintf('Imported %d gallery images (%d created, %d updated).', $created + $updated, $created, $updated));
+        $io->success(sprintf(
+            'Imported %d gallery images (%d created, %d updated, %d cached, %d cache failures).',
+            $created + $updated,
+            $created,
+            $updated,
+            $cached,
+            $cacheFailures,
+        ));
 
         return Command::SUCCESS;
     }

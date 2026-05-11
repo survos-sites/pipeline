@@ -24,7 +24,7 @@ final class AppMenu implements KnpMenuHelperInterface
     ) {
     }
 
-    #[AsEventListener(event: MenuEvent::NAVBAR_MENU)]
+    #[AsEventListener(event: MenuEvent::NAVBAR_PRIMARY)]
     public function navbarMenu(MenuEvent $event): void
     {
         $menu = $event->getMenu();

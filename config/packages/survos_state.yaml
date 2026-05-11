@@ -1,0 +1,2 @@
+survos_state:
+    async_transport_dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
