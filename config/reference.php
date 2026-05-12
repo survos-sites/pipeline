@@ -2378,6 +2378,155 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     workflow_paths?: list<scalar|Param|null>,
  *     async_transport_dsn?: scalar|Param|null, // Default: "doctrine://default"
  * }
+ * @psalm-type SurvosImportConfig = array{
+ *     dir?: scalar|Param|null, // The default directory for data files // Default: "data"
+ * }
+ * @psalm-type SurvosMeiliConfig = array{
+ *     routes_enabled?: bool|Param, // Auto-register this bundle's controllers via attribute scanning. Set false to manage routes manually in your app's config/routes/. // Default: true
+ *     route_prefix?: scalar|Param|null, // URL prefix applied to this bundle's routes. // Default: "/meili"
+ *     core_name?: scalar|Param|null, // Default: "core"
+ *     enabled?: bool|Param, // Default: true
+ *     meiliUiUrl?: scalar|Param|null, // Base URL of the Meilisearch UI (riccox). Used to generate per-index links. Override via MEILI_UI_URL env var. // Default: "http://127.0.0.1:24900/ins/0"
+ *     host?: scalar|Param|null, // Default: "%env(default::MEILI_SERVER)%"
+ *     apiKey?: scalar|Param|null, // Default: "%env(default::MEILI_ADMIN_KEY)%"
+ *     transport?: scalar|Param|null, // Default: "%env(default::MEILI_TRANSPORT)%"
+ *     searchKey?: scalar|Param|null, // Default: "%env(default::MEILI_SEARCH_KEY)%"
+ *     meiliPrefix?: scalar|Param|null, // Default: "%env(default::MEILI_PREFIX)%"
+ *     translationStyle?: scalar|Param|null, // Default: "simple"
+ *     passLocale?: bool|Param, // Default: false
+ *     multiLingual?: bool|Param, // turn on multi-lingual indexing // Default: false
+ *     maxValuesPerFacet?: int|Param, // Default: 1000
+ *     tools?: list<array{ // Default: []
+ *         label?: scalar|Param|null,
+ *         url?: scalar|Param|null,
+ *     }>,
+ *     embedders?: array<string, array{ // Default: []
+ *         source?: scalar|Param|null,
+ *         model?: scalar|Param|null,
+ *         apiKey?: scalar|Param|null, // Default: null
+ *         for?: scalar|Param|null, // Default: null
+ *         template?: scalar|Param|null, // Default: null
+ *         documentTemplateMaxBytes?: int|Param, // Default: 4096
+ *         maxTokensPerDoc?: int|Param, // Default: null
+ *         examples?: list<scalar|Param|null>,
+ *     }>,
+ *     pricing?: array{
+ *         embedders?: array<string, scalar|Param|null>,
+ *     },
+ *     meili_settings?: array{
+ *         typoTolerance?: array{
+ *             enabled?: bool|Param, // Default: true
+ *             oneTypo?: int|Param, // Default: 5
+ *             twoTypos?: int|Param, // Default: 9
+ *             disableOnWords?: list<scalar|Param|null>,
+ *             disableOnAttributes?: list<scalar|Param|null>,
+ *             disableOnNumbers?: bool|Param, // Default: false
+ *         },
+ *         faceting?: array{
+ *             maxValuesPerFacet?: int|Param, // Default: 1000
+ *             sortFacetValuesBy?: array<string, scalar|Param|null>,
+ *         },
+ *         pagination?: array{
+ *             maxTotalHits?: int|Param, // Default: 1000
+ *         },
+ *         facetSearch?: bool|Param, // Default: true
+ *         prefixSearch?: scalar|Param|null, // Default: "indexingTime"
+ *     },
+ *     entity_dirs?: list<scalar|Param|null>,
+ *     file_proxy?: array{
+ *         enabled?: bool|Param, // Default: true
+ *         allow_hidden?: bool|Param, // Default: false
+ *         cache_control?: scalar|Param|null, // Default: "private, max-age=60"
+ *         roots?: list<scalar|Param|null>,
+ *     },
+ *     chat?: array{
+ *         workspaces?: array<string, array{ // Default: []
+ *             source?: scalar|Param|null, // LLM provider: openAi | azureOpenAi | mistral | gemini | vLlm // Default: "openAi"
+ *             apiKey?: scalar|Param|null, // Provider API key (use %env(OPENAI_API_KEY)%) // Default: null
+ *             model?: scalar|Param|null, // Model sent in each completion request (not stored in workspace settings) // Default: "gpt-4o-mini"
+ *             baseUrl?: scalar|Param|null, // Default: null
+ *             orgId?: scalar|Param|null, // Default: null
+ *             projectId?: scalar|Param|null, // Default: null
+ *             apiVersion?: scalar|Param|null, // Default: null
+ *             deploymentId?: scalar|Param|null, // Default: null
+ *             label?: scalar|Param|null, // Human-readable label used in dynamic prompts (defaults to indexName) // Default: null
+ *             curatorName?: scalar|Param|null, // Optional explicit curator display name for this workspace template // Default: null
+ *             curatorNameByIndex?: list<scalar|Param|null>,
+ *             detailUrlPattern?: scalar|Param|null, // URL pattern for item detail pages; use {id} as placeholder e.g. /product/{id} // Default: null
+ *             schemaUrl?: scalar|Param|null, // Optional OpenAPI schema URL used to explain field meanings in collection overview responses // Default: null
+ *             examples?: list<scalar|Param|null>,
+ *             examplesByIndex?: list<list<scalar|Param|null>>,
+ *             prompts?: array{ // Static prompt overrides — these win over dynamic template rendering
+ *                 system?: scalar|Param|null, // Default: null
+ *                 searchFilterParam?: scalar|Param|null, // Default: null
+ *                 searchDescription?: scalar|Param|null, // Default: null
+ *                 searchQParam?: scalar|Param|null, // Default: null
+ *                 searchIndexUidParam?: scalar|Param|null, // Pin the index UID — prevents Meilisearch generating a full enum of all indexes, which blows the OpenAI context limit. // Default: null
+ *             },
+ *             indexes?: list<scalar|Param|null>,
+ *         }>,
+ *     },
+ * }
+ * @psalm-type SurvosDataConfig = array{
+ *     data_dir?: scalar|Param|null, // Default: "%env(APP_DATA_DIR)%"
+ *     dataset_root?: scalar|Param|null, // Default: "work"
+ *     pixie_root?: scalar|Param|null, // Default: "pixie"
+ *     runs_root?: scalar|Param|null, // Default: "runs"
+ *     cache_root?: scalar|Param|null, // Default: "cache"
+ *     zips_root?: scalar|Param|null, // Default: "%env(ZIPS_DIR)%"
+ *     default_object_filename?: scalar|Param|null, // Default: "obj.jsonl"
+ *     tenant_database_prefix?: scalar|Param|null, // Default: ""
+ *     tenants?: array<string, array{ // Default: []
+ *         database?: scalar|Param|null, // Default: null
+ *     }>,
+ * }
+ * @psalm-type SurvosMediaConfig = array{
+ *     default_locale?: scalar|Param|null, // Default: "en"
+ *     cache_ttl?: scalar|Param|null, // Default: 3600
+ *     sais_integration?: bool|Param, // Default: true
+ *     media_server?: array{
+ *         host?: scalar|Param|null, // Default: "https://media.wip"
+ *         apiKey?: scalar|Param|null, // Default: null
+ *         resize_path?: scalar|Param|null, // Default: "/media/{preset}/{id}"
+ *     },
+ *     presets?: array<string, array{ // Default: {"small":{"resize":"fill","width":192,"height":192},"medium":{"resize":"fit","width":400,"height":400},"large":{"resize":"fit","width":800,"height":800},"ai":{"resize":"fit","width":512,"height":512},"thumb":{"resize":"fit","width":300,"height":300}}
+ *         resize?: scalar|Param|null, // Default: "fit"
+ *         width?: int|Param,
+ *         height?: int|Param,
+ *     }>,
+ *     providers?: array<string, array{ // Default: []
+ *         enabled?: bool|Param, // Default: true
+ *         api_key?: scalar|Param|null,
+ *         api_secret?: scalar|Param|null,
+ *         access_token?: scalar|Param|null,
+ *         options?: list<mixed>,
+ *     }>,
+ * }
+ * @psalm-type SurvosJsTwigConfig = array{
+ *     debug?: bool|Param, // Default: false
+ *     version?: scalar|Param|null, // Default: 1
+ *     db?: scalar|Param|null, // Default: "db"
+ *     routing?: array{
+ *         routes_to_expose?: list<scalar|Param|null>,
+ *     },
+ *     stores?: list<array{ // Default: []
+ *         batch?: int|Param, // batch size when loading api // Default: null
+ *         name?: scalar|Param|null, // the store name
+ *         schema?: scalar|Param|null, // the index definition
+ *         url?: scalar|Param|null, // the API to use to load if empty. json-ld iterates through pages
+ *         response_key?: scalar|Param|null, // key if API returns an object response, e.g. dummyjson returns {'products': [...]}
+ *     }>,
+ * }
+ * @psalm-type SurvosImgproxyConfig = array{
+ *     host?: scalar|Param|null, // Default: "%env(default::IMGPROXY_HOST)%"
+ *     key?: scalar|Param|null, // Default: "%env(default::IMGPROXY_KEY)%"
+ *     salt?: scalar|Param|null, // Default: "%env(default::IMGPROXY_SALT)%"
+ *     presets?: array<string, array{ // Default: {"ai":{"width":512,"height":512,"resize":"fit"},"thumb":{"width":300,"height":300,"resize":"fit"},"small":{"width":192,"height":192,"resize":"fit"},"medium":{"width":600,"height":400,"resize":"fit"},"large":{"width":1200,"height":800,"resize":"fit"}}
+ *         width?: int|Param,
+ *         height?: int|Param,
+ *         resize?: scalar|Param|null, // Default: "fit"
+ *     }>,
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -2404,6 +2553,12 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     knp_menu?: KnpMenuConfig,
  *     survos_tabler?: SurvosTablerConfig,
  *     survos_state?: SurvosStateConfig,
+ *     survos_import?: SurvosImportConfig,
+ *     survos_meili?: SurvosMeiliConfig,
+ *     survos_data?: SurvosDataConfig,
+ *     survos_media?: SurvosMediaConfig,
+ *     survos_js_twig?: SurvosJsTwigConfig,
+ *     survos_imgproxy?: SurvosImgproxyConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -2434,6 +2589,12 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         knp_menu?: KnpMenuConfig,
  *         survos_tabler?: SurvosTablerConfig,
  *         survos_state?: SurvosStateConfig,
+ *         survos_import?: SurvosImportConfig,
+ *         survos_meili?: SurvosMeiliConfig,
+ *         survos_data?: SurvosDataConfig,
+ *         survos_media?: SurvosMediaConfig,
+ *         survos_js_twig?: SurvosJsTwigConfig,
+ *         survos_imgproxy?: SurvosImgproxyConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -2461,6 +2622,12 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         knp_menu?: KnpMenuConfig,
  *         survos_tabler?: SurvosTablerConfig,
  *         survos_state?: SurvosStateConfig,
+ *         survos_import?: SurvosImportConfig,
+ *         survos_meili?: SurvosMeiliConfig,
+ *         survos_data?: SurvosDataConfig,
+ *         survos_media?: SurvosMediaConfig,
+ *         survos_js_twig?: SurvosJsTwigConfig,
+ *         survos_imgproxy?: SurvosImgproxyConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -2490,6 +2657,12 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         knp_menu?: KnpMenuConfig,
  *         survos_tabler?: SurvosTablerConfig,
  *         survos_state?: SurvosStateConfig,
+ *         survos_import?: SurvosImportConfig,
+ *         survos_meili?: SurvosMeiliConfig,
+ *         survos_data?: SurvosDataConfig,
+ *         survos_media?: SurvosMediaConfig,
+ *         survos_js_twig?: SurvosJsTwigConfig,
+ *         survos_imgproxy?: SurvosImgproxyConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

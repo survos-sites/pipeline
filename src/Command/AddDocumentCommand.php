@@ -13,13 +13,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
-use Survos\AiWorkflowBundle\Task\AnnotateHandwritingTask;
-use Survos\AiWorkflowBundle\Task\ExtractMetadataTask;
-use Survos\AiWorkflowBundle\Task\GenerateTitleTask;
-use Survos\AiWorkflowBundle\Task\OcrMistralTask;
-use Survos\AiWorkflowBundle\Task\SummarizeTask;
+use Survos\AiWorkflowBundle\Task\Analysis\ExtractMetadataTask;
+use Survos\AiWorkflowBundle\Task\Analysis\GenerateTitleTask;
+use Survos\AiWorkflowBundle\Task\Analysis\SummarizeTask;
+use Survos\AiWorkflowBundle\Task\Observation\AnnotateHandwritingTask;
+use Survos\AiWorkflowBundle\Task\Observation\OcrMistralTask;
+use Survos\AiWorkflowBundle\Task\Observation\TranscribeHandwritingTask;
 use Survos\AiWorkflowBundle\Task\TaskRegistry;
-use Survos\AiWorkflowBundle\Task\TranscribeHandwritingTask;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**

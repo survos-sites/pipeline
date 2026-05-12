@@ -8,7 +8,7 @@ use App\Entity\GalleryImage;
 use App\Repository\GalleryImageRepository;
 use App\Service\GalleryImageCache;
 use Doctrine\ORM\EntityManagerInterface;
-use Survos\AiWorkflowBundle\Task\ObserveTask;
+use Survos\AiWorkflowBundle\Task\Observation\ObserveTask;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Attribute\Option;

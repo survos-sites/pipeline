@@ -24,8 +24,8 @@
                 <div class="card-footer d-flex justify-content-between align-items-center flex-wrap gap-2">
                     <div class="d-flex gap-2 flex-wrap">
                         <span class="badge bg-blue-lt">{{ image.marking }}</span>
-                        {% if image.pendingCount > 0 %}
-                            <span class="badge bg-yellow-lt">{{ image.pendingCount }} pending</span>
+                        {% if image.allPendingSteps|length > 0 %}
+                            <span class="badge bg-yellow-lt">{{ image.allPendingSteps|length }} pending</span>
                         {% else %}
                             <span class="badge bg-green-lt">queue empty</span>
                         {% endif %}
@@ -68,9 +68,11 @@
                         <tr>
                             <th class="text-secondary fw-normal ps-3">Pending steps</th>
                             <td>
-                                {% if image.pendingCount > 0 %}
-                                    {% for step in image.pendingSteps %}
-                                        <span class="badge bg-yellow-lt font-monospace">{{ step }}</span>
+
+                                {% if image.allPendingSteps|length > 0 %}
+                                    {% for transition, steps in image.pendingSteps %}
+                                        <span class="badge bg-yellow-lt font-monospace">{{ transition }}</span>
+                                        {{ steps|join(',') }}
                                     {% endfor %}
                                 {% else %}
                                     <span class="text-secondary">empty</span>
@@ -97,7 +99,7 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <a href="#text" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab">Text</a>
+                            <a href="#text" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab">Description</a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a href="#summary" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab">Summary</a>

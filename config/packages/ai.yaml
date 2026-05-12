@@ -28,10 +28,10 @@ ai:
             model: 'gpt-4o-mini'
             tools: false
 
-        # Visual description
+        # Visual description — full model needed for exhaustive inventory-level prose
         description:
             platform: 'ai.platform.openai'
-            model: 'gpt-4o-mini'
+            model: 'gpt-5.4'
             tools: false
 
         # Metadata extraction, NER, title, summarize

@@ -39,8 +39,8 @@
                         <div class="text-secondary">{{ image.collection ?? 'Uncollected' }}</div>
                         <div class="mt-2">
                             <span class="badge bg-blue-lt">{{ image.marking }}</span>
-                            {% if image.pendingCount > 0 %}
-                                <span class="badge bg-yellow-lt">{{ image.pendingCount }} pending</span>
+                            {% if image.allPendingSteps|length > 0 %}
+                                <span class="badge bg-yellow-lt">{{ image.allPendingSteps|length }} pending</span>
                             {% endif %}
                         </div>
                     </div>

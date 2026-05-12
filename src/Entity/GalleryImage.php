@@ -11,10 +11,10 @@ use Survos\AiWorkflowBundle\Contract\ContextSubjectInterface;
 use Survos\AiWorkflowBundle\Contract\ImageSubjectInterface;
 use Survos\AiWorkflowBundle\Contract\WorkflowSubjectInterface;
 use Survos\AiWorkflowBundle\Workflow\SubjectFlow;
+use Survos\StateBundle\Traits\MarkingInterface;
 use Survos\FieldBundle\Attribute\EntityMeta;
 use Survos\FieldBundle\Attribute\RouteIdentity;
 use Survos\FieldBundle\Entity\RouteIdentityTrait;
-use Survos\StateBundle\Traits\MarkingInterface;
 use Survos\StateBundle\Traits\MarkingTrait;
 
 #[ORM\Entity(repositoryClass: GalleryImageRepository::class)]
@@ -45,6 +45,9 @@ class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, C
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     public ?string $localOriginalPath = null;
+
+    // TODO: replace with media-bundle/mediary thumbnail URL resolution
+    public ?string $resolvedImageUrl = null;
 
 
     #[ORM\Column]
@@ -102,11 +105,8 @@ class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, C
 
     public function getWorkflowImageUrl(): ?string
     {
-        if ($this->localOriginalPath && is_file($this->localOriginalPath)) {
-            return 'file://' . $this->localOriginalPath;
-        }
-
-        return $this->sourceUrl ?: null;
+        return $this->resolvedImageUrl
+            ?? (str_starts_with((string) $this->sourceUrl, 'http') ? $this->sourceUrl : null);
     }
 
     public function getWorkflowContext(): array

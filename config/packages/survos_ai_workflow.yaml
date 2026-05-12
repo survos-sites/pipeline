@@ -1,7 +1,4 @@
 survos_ai_workflow:
-    # Disable tasks you don't need in this app.
-    # context_description needs prior extract_metadata to be useful — skip for demos.
-    # translate is not needed unless you have non-English material.
     disabled_tasks:
-#        - context_description
-        - translate
+        - enrich_from_thumbnail  # deprecated — use observe then analyze instead
+        - triage                 # deprecated — use observe instead
