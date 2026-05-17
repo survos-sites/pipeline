@@ -88,6 +88,11 @@ class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, C
         return $this->code;
     }
 
+    public function getWorkflowSubjectType(): string
+    {
+        return (new \ReflectionClass(static::class))->getShortName();
+    }
+
     public function getWorkflowScope(): ?string
     {
         return null;

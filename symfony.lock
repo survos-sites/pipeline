@@ -64,18 +64,6 @@
             "config/packages/nelmio_cors.yaml"
         ]
     },
-    "php-http/discovery": {
-        "version": "1.20",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "1.18",
-            "ref": "f45b5dd173a27873ab19f5e3180b2f661c21de02"
-        },
-        "files": [
-            "config/packages/http_discovery.yaml"
-        ]
-    },
     "phpunit/phpunit": {
         "version": "13.1",
         "recipe": {
@@ -91,19 +79,16 @@
             "bin/phpunit"
         ]
     },
-    "survos/ai-claims-bundle": {
-        "version": "2.1.2"
-    },
     "survos/ai-workflow-bundle": {
         "version": "dev-main"
     },
     "survos/atlas-bundle": {
         "version": "2.1.2"
     },
-    "survos/core-bundle": {
+    "survos/claims-bundle": {
         "version": "2.1.2"
     },
-    "survos/data-bundle": {
+    "survos/core-bundle": {
         "version": "2.1.2"
     },
     "survos/deployment-bundle": {
@@ -116,26 +101,13 @@
         "version": "2.0.0"
     },
     "survos/import-bundle": {
-        "version": "2.1.2"
+        "version": "2.2.4"
     },
     "survos/jsonl-bundle": {
         "version": "2.1.2"
     },
     "survos/media-bundle": {
         "version": "2.1.2"
-    },
-    "survos/meili-bundle": {
-        "version": "2.1",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "2.0",
-            "ref": "203685352e56485cfb1d3b0fd2900e41d6bdc859"
-        },
-        "files": [
-            "config/packages/survos_meili.yaml",
-            "config/routes/survos_meili.yaml"
-        ]
     },
     "symfony/ai-bundle": {
         "version": "0.8",
