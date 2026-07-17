@@ -134,9 +134,15 @@
             "type": "path",
             "url": "../mono/bu/simple-datatables-bundle"
         },
-        "symfony_ai_fork": {
-            "type": "vcs",
-            "url": "https://github.com/tacman/ai"
+        "survos_ai_workflow": {
+            "type": "path",
+            "url": "../mono/bu/ai-workflow-bundle",
+            "options": {
+                "symlink": false,
+                "versions": {
+                    "survos/ai-workflow-bundle": "2.12.0"
+                }
+            }
         }
     }
 }
