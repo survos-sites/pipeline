@@ -7,9 +7,11 @@ namespace App\Entity;
 use App\Repository\GalleryImageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Survos\AiWorkflowBundle\Contract\ContextSubjectInterface;
-use Survos\AiWorkflowBundle\Contract\ImageSubjectInterface;
-use Survos\AiWorkflowBundle\Contract\WorkflowSubjectInterface;
+use Survos\DataContracts\Workflow\ContextSubjectInterface;
+use Survos\DataContracts\Workflow\ImageSubjectInterface;
+use Survos\DataContracts\Workflow\WorkflowSubjectInterface;
+use Survos\AiWorkflowBundle\Traits\PendingStepsInterface;
+use Survos\AiWorkflowBundle\Traits\PendingStepsTrait;
 use Survos\AiWorkflowBundle\Workflow\SubjectFlow;
 use Survos\StateBundle\Traits\MarkingInterface;
 use Survos\FieldBundle\Attribute\EntityMeta;
@@ -25,9 +27,10 @@ use Survos\StateBundle\Traits\MarkingTrait;
     description: 'Plain image records imported from the gallery manifest.',
 )]
 #[RouteIdentity(field: 'code')]
-class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, ContextSubjectInterface, MarkingInterface
+class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, ContextSubjectInterface, MarkingInterface, PendingStepsInterface
 {
     use MarkingTrait;
+    use PendingStepsTrait;
     use RouteIdentityTrait;
 
     #[ORM\Id]
