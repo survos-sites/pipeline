@@ -13,6 +13,14 @@ framework:
                 delay: 1000
                 multiplier: 2
                 max_delay: 8000
+        scoped_clients:
+            # ai-tools florence-2 runs on CPU — a single image can take 30-90s.
+            ai_tools.client:
+                base_uri: '%env(AI_TOOLS_URL)%'
+                timeout: 240
+                max_duration: 300
+                retry_failed:
+                    enabled: false
 
     # Note that the session will be started ONLY if you read or write from it.
     session: true

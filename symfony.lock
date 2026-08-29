@@ -88,14 +88,17 @@
     "survos/claims-bundle": {
         "version": "2.1.2"
     },
-    "survos/core-bundle": {
-        "version": "2.1.2"
-    },
     "survos/deployment-bundle": {
         "version": "2.1.2"
     },
+    "survos/fetch-bundle": {
+        "version": "2.19.2"
+    },
     "survos/field-bundle": {
         "version": "2.1.2"
+    },
+    "survos/iiif-bundle": {
+        "version": "2.19.4"
     },
     "survos/imgproxy-bundle": {
         "version": "2.0.0"
@@ -103,11 +106,26 @@
     "survos/import-bundle": {
         "version": "2.2.4"
     },
+    "survos/js-twig-bundle": {
+        "version": "2.18.18"
+    },
     "survos/jsonl-bundle": {
         "version": "2.1.2"
     },
+    "survos/kit-bundle": {
+        "version": "2.7.6"
+    },
     "survos/media-bundle": {
         "version": "2.1.2"
+    },
+    "survos/simple-datatables-bundle": {
+        "version": "dev-main"
+    },
+    "survos/state-bundle": {
+        "version": "2.11.4"
+    },
+    "survos/tabler-bundle": {
+        "version": "2.19.2"
     },
     "symfony/ai-bundle": {
         "version": "0.8",

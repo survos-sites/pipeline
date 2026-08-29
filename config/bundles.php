@@ -33,4 +33,6 @@ return [
     Survos\ImgproxyBundle\SurvosImgproxyBundle::class => ['all' => true],
     Survos\ImportBundle\SurvosImportBundle::class => ['all' => true],
     Survos\Kit\SurvosKitBundle::class => ['all' => true],
+    Survos\FetchBundle\SurvosFetchBundle::class => ['all' => true],
+    Survos\IiifBundle\SurvosIiifBundle::class => ['all' => true],
 ];
