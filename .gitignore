@@ -31,3 +31,6 @@
 ###< symfony/asset-mapper ###
 config.bat
 node_modules
+
+# Scratch pipeline output
+/x.jsonl
