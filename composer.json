@@ -9,8 +9,8 @@
         "php": "^8.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "api-platform/doctrine-orm": "^4.3",
-        "api-platform/symfony": "^4.3",
+        "api-platform/doctrine-orm": "^4.3 || ^5.0",
+        "api-platform/symfony": "^4.3 || ^5.0",
         "doctrine/doctrine-bundle": "^3.2",
         "doctrine/doctrine-migrations-bundle": "^4.0",
         "doctrine/orm": "^3.6",
@@ -26,7 +26,7 @@
         "survos/import-bundle": "^2.2",
         "survos/js-twig-bundle": "^2.2",
         "survos/media-bundle": "*",
-        "survos/simple-datatables-bundle": "*",
+        "survos/simple-datatables-bundle": "^2.31",
         "survos/state-bundle": "^2.1",
         "survos/tabler-bundle": "^2.1",
         "symfony/asset": "^8.0",
@@ -129,10 +129,13 @@
             "require": "8.1.*"
         }
     },
-    "repositories": {
-        "survos_simple_datatables": {
-            "type": "path",
-            "url": "../mono/bu/simple-datatables-bundle"
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://satis.survos.com",
+            "only": [
+                "survos/simple-datatables-bundle"
+            ]
         }
-    }
+    ]
 }
