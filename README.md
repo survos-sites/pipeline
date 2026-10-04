@@ -6,6 +6,22 @@ A Symfony application that demonstrates [`survos/ai-pipeline-bundle`](https://pa
 
 ---
 
+## Symfony gallery setup
+
+The Symfony routes `/` and `/gallery` read `GalleryImage` records from the database. The committed image manifest alone does not populate that table. After installing dependencies and configuring the application database, apply the application's migrations and import the demo rows:
+
+```bash
+php bin/console doctrine:migrations:migrate
+php bin/console app:gallery:import --skip-download
+symfony server:start -d
+```
+
+Open `/gallery` on the Symfony server. Its table uses `survos/grid-bundle`. The import creates or updates rows by manifest code, without deleting other records. `--skip-download` avoids caching source images locally and makes no AI requests; the browser still uses the manifest image URLs. Some local manifest images may need to be supplied separately.
+
+Omit `--skip-download` when local source-image caching is needed and `AI_TOOLS_SHARED_DIR` is configured. Add `--queue` only when you intend to replace workflow queues with the default observe task queue; it is not needed to browse the demo.
+
+This database-backed gallery is separate from the static GitHub Pages viewer described below. For local bundle development, install normally with Composer, then use `/path/to/mono/link /path/to/ai-pipeline-demo`; do not add Composer path repositories.
+
 ## What it does
 
 1. You maintain manifests (`public/data/images.json` and `public/data/pdfs.json`) listing document URLs, titles, and which pipeline tasks to run.

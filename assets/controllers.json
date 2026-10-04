@@ -1,5 +1,12 @@
 {
     "controllers": {
+        "@survos/grid-bundle": {
+            "grid": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": {}
+            }
+        },
         "@survos/iiif-bundle": {
             "iiif-viewer": {
                 "enabled": true,
@@ -34,15 +41,6 @@
                 "enabled": true,
                 "fetch": "lazy",
                 "autoimport": []
-            }
-        },
-        "@survos/simple-datatables-bundle": {
-            "table": {
-                "enabled": true,
-                "fetch": "lazy",
-                "autoimport": {
-                    "@survos/simple-datatables/style.css": true
-                }
             }
         },
         "@survos/state-bundle": {

@@ -1,0 +1,4 @@
+ai:
+    platform:
+        typesafe:
+            api_key: '%env(TYPESAFE_API_KEY)%'

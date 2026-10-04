@@ -97,6 +97,9 @@
     "survos/field-bundle": {
         "version": "2.1.2"
     },
+    "survos/grid-bundle": {
+        "version": "2.33.0"
+    },
     "survos/iiif-bundle": {
         "version": "2.19.4"
     },
@@ -117,9 +120,6 @@
     },
     "survos/media-bundle": {
         "version": "2.1.2"
-    },
-    "survos/simple-datatables-bundle": {
-        "version": "dev-main"
     },
     "survos/state-bundle": {
         "version": "2.11.4"

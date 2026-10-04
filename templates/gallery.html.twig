@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="card-body">
-            <twig:simple_datatables
+            <twig:grid
                 :data="images"
                 :columns="[
                     {name: 'title', title: 'Title'},
@@ -20,7 +20,9 @@
                     {name: 'marking', title: 'Place'},
                     {name: 'pendingSteps', title: 'Pending Steps'}
                 ]"
-                :perPage="25"
+                :pageLength="25"
+                :trans="true"
+                scrollY="70vh"
             />
         </div>
     </div>
