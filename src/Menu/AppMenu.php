@@ -6,15 +6,14 @@ namespace App\Menu;
 
 use Survos\TablerBundle\Event\MenuEvent;
 use Survos\TablerBundle\Service\MenuService;
-use Survos\TablerBundle\Traits\KnpMenuHelperInterface;
-use Survos\TablerBundle\Traits\KnpMenuHelperTrait;
+use Survos\TablerBundle\Menu\MenuBuilderTrait;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-final class AppMenu implements KnpMenuHelperInterface
+final class AppMenu
 {
-    use KnpMenuHelperTrait;
+    use MenuBuilderTrait;
 
     public function __construct(
         #[Autowire('%kernel.environment%')]
@@ -28,7 +27,7 @@ final class AppMenu implements KnpMenuHelperInterface
     public function navbarMenu(MenuEvent $event): void
     {
         $menu = $event->getMenu();
-        $this->add($menu, 'app_gallery', icon: 'tabler:photo');
-        $this->add($menu, 'survos_ai_workflow_tasks', icon: 'tabler:list-details');
+        $this->add($menu, 'app_gallery', icon: 'tabler:photo', translationDomain: 'routing', label: 'app_gallery');
+        $this->add($menu, 'survos_ai_workflow_tasks', icon: 'tabler:list-details', translationDomain: 'routing', label: 'survos_ai_workflow_tasks');
     }
 }
