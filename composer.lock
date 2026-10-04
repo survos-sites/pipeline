@@ -5824,16 +5824,16 @@
         },
         {
             "name": "survos/state-bundle",
-            "version": "2.34.31",
+            "version": "2.35.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/state-bundle.git",
-                "reference": "30df705b5b5da70009f93b4120e03a740526dad2"
+                "reference": "34d846c253507cfaf21f514671695af219d21722"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/state-bundle/zipball/30df705b5b5da70009f93b4120e03a740526dad2",
-                "reference": "30df705b5b5da70009f93b4120e03a740526dad2",
+                "url": "https://api.github.com/repos/survos/state-bundle/zipball/34d846c253507cfaf21f514671695af219d21722",
+                "reference": "34d846c253507cfaf21f514671695af219d21722",
                 "shasum": ""
             },
             "require": {
@@ -5899,7 +5899,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/state-bundle/issues",
-                "source": "https://github.com/survos/state-bundle/tree/2.34.31"
+                "source": "https://github.com/survos/state-bundle/tree/2.35.1"
             },
             "funding": [
                 {
@@ -5907,7 +5907,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-03T10:25:03+00:00"
+            "time": "2026-10-04T18:46:52+00:00"
         },
         {
             "name": "survos/tabler-bundle",

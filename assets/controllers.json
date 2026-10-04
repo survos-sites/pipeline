@@ -4,7 +4,7 @@
             "grid": {
                 "enabled": true,
                 "fetch": "lazy",
-                "autoimport": {}
+                "autoimport": []
             }
         },
         "@survos/iiif-bundle": {
