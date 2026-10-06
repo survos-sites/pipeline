@@ -23,10 +23,8 @@
  * }>
  */
 return [
-    '@survos/js-twig/generated/fos_routes.js' => ['path' => '@survos/js-twig/generated/fos_routes.js'],
     '@survos/js-twig-bundle/twig_api' => ['path' => './vendor/survos/js-twig-bundle/assets/src/lib/twig_api.js'],
     '@survos/js-twig-bundle/twig_blocks' => ['path' => './vendor/survos/js-twig-bundle/assets/src/lib/twig_blocks.js'],
-    'fos-routing' => ['version' => '0.0.6'],
     'app' => ['path' => './assets/app.js', 'entrypoint' => true],
     '@hotwired/stimulus' => ['version' => '3.2.2'],
     '@symfony/stimulus-bundle' => ['path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js'],
