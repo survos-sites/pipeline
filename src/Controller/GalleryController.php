@@ -5,6 +5,11 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\GalleryImage;
+use Survos\AiWorkflowBundle\Workflow\SubjectFlow;
+use Survos\WorkflowExtrasBundle\Contract\TransitionExecutorInterface;
+use Symfony\Component\Workflow\Registry;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Repository\GalleryImageRepository;
 use Survos\FieldBundle\Attribute\RouteMeta;
 use Survos\FieldBundle\Enum\Audience;
@@ -41,12 +46,28 @@ final class GalleryController extends AbstractController
         sitemap: false,
     )]
     #[Template('gallery/show.html.twig')]
-    public function show(GalleryImage $image): array
+    public function show(GalleryImage $image, Registry $registry): array
     {
         return [
             'image' => $image,
+            'transitions' => $registry->get($image, SubjectFlow::WORKFLOW_NAME)->getEnabledTransitions($image),
             'claimSubjectType' => GalleryImage::class,
             'claimSubjectId' => $image->code,
         ];
+    }
+
+    #[Route('/gallery/{galleryImageId}/transition/{transition}', name: 'app_gallery_transition', methods: ['POST'])]
+    public function transition(GalleryImage $image, string $transition, Request $request, Registry $registry, TransitionExecutorInterface $executor): RedirectResponse
+    {
+        if (!$this->isCsrfTokenValid('gallery_transition_'.$image->code, $request->getPayload()->getString('_token'))) {
+            throw $this->createAccessDeniedException('Invalid transition token.');
+        }
+        $workflow = $registry->get($image, SubjectFlow::WORKFLOW_NAME);
+        if (!$workflow->can($image, $transition)) {
+            throw $this->createAccessDeniedException('Transition is not currently enabled.');
+        }
+        $executor->execute($workflow, $image, $transition);
+
+        return $this->redirectToRoute('app_gallery_show', ['galleryImageId' => $image->code]);
     }
 }

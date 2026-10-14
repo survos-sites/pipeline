@@ -43,12 +43,6 @@
                 "autoimport": []
             }
         },
-        "@survos/state-bundle": {
-            "workflow": {
-                "enabled": true,
-                "fetch": "eager"
-            }
-        },
         "@survos/tabler-bundle": {
             "accordion": {
                 "enabled": true,
@@ -73,6 +67,12 @@
             "conditional-fields": {
                 "enabled": true,
                 "fetch": "lazy"
+            }
+        },
+        "@survos/workflow-extras-bundle": {
+            "workflow": {
+                "enabled": true,
+                "fetch": "eager"
             }
         },
         "@symfony/ux-turbo": {

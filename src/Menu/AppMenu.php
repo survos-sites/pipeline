@@ -8,7 +8,8 @@ use Survos\TablerBundle\Event\MenuEvent;
 use Survos\TablerBundle\Service\MenuService;
 use Survos\TablerBundle\Menu\MenuBuilderTrait;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
+use Survos\MenuBundle\Attribute\AsMenuListener;
+use Survos\MenuBundle\MenuSlot;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 final class AppMenu
@@ -23,7 +24,7 @@ final class AppMenu
     ) {
     }
 
-    #[AsEventListener(event: MenuEvent::NAVBAR_PRIMARY)]
+    #[AsMenuListener(MenuSlot::NAVBAR_PRIMARY)]
     public function navbarMenu(MenuEvent $event): void
     {
         $menu = $event->getMenu();

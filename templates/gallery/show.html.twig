@@ -31,7 +31,7 @@
                         {% endif %}
                     </div>
                     <a href="{{ image.displayUrl }}" target="_blank" rel="noopener" class="small">Open source</a>
-                    <a href="{{ path('survos_state_debug_transitions', {globalKey: 'APP_ENTITY_GALLERY_IMAGE', workflowCode: 'ai_subject', redirectUrl: app.request.uri}|merge(image.erp)) }}"
+                    <a href="{{ path('survos_workflow_extras', {flowCode: 'ai_subject'}) }}"
                        class="btn btn-sm btn-outline-secondary" title="Debug transitions">
                         {{ ux_icon('mdi:state-machine') }}
                     </a>
@@ -153,13 +153,15 @@
                             />
                         </div>
                         <div class="tab-pane" id="workflow" role="tabpanel">
-                            <twig:state:workflow-marking
-                                subject="{{ image }}"
-                                globalKey="APP_ENTITY_GALLERY_IMAGE"
-                                workflowCode="ai_subject"
-                                redirectUrl="{{ app.request.uri }}"
-                                layout="table"
-                            />
+                            <p>Current place: <strong>{{ image.marking }}</strong></p>
+                            {% for transition in transitions %}
+                                <form method="post" action="{{ path('app_gallery_transition', {galleryImageId: image.code, transition: transition.name}) }}" class="d-inline">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('gallery_transition_' ~ image.code) }}">
+                                    <button class="btn btn-outline-primary" type="submit">{{ transition.name|humanize }}</button>
+                                </form>
+                            {% else %}
+                                <p class="text-muted">No transitions are currently enabled.</p>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

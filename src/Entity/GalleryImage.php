@@ -13,11 +13,10 @@ use Survos\DataContracts\Workflow\WorkflowSubjectInterface;
 use Survos\AiWorkflowBundle\Traits\PendingStepsInterface;
 use Survos\AiWorkflowBundle\Traits\PendingStepsTrait;
 use Survos\AiWorkflowBundle\Workflow\SubjectFlow;
-use Survos\StateBundle\Traits\MarkingInterface;
 use Survos\FieldBundle\Attribute\EntityMeta;
 use Survos\FieldBundle\Attribute\RouteIdentity;
 use Survos\FieldBundle\Entity\RouteIdentityTrait;
-use Survos\StateBundle\Traits\MarkingTrait;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: GalleryImageRepository::class)]
 #[EntityMeta(
@@ -27,9 +26,24 @@ use Survos\StateBundle\Traits\MarkingTrait;
     description: 'Plain image records imported from the gallery manifest.',
 )]
 #[RouteIdentity(field: 'code')]
-class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, ContextSubjectInterface, MarkingInterface, PendingStepsInterface
+class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, ContextSubjectInterface, PendingStepsInterface
 {
-    use MarkingTrait;
+    #[ORM\Column(type: 'string', length: 32, nullable: true)]
+    #[Groups(['transition', 'minimum', 'marking', 'searchable'])]
+    public ?string $marking = null;
+
+    public function getMarking(): ?string
+    {
+        return $this->marking;
+    }
+
+    public function setMarking(?string $marking, array $context = []): self
+    {
+        $this->marking = $marking;
+
+        return $this;
+    }
+
     use PendingStepsTrait;
     use RouteIdentityTrait;
 

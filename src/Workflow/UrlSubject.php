@@ -8,8 +8,6 @@ use Survos\DataContracts\Workflow\ContextSubjectInterface;
 use Survos\DataContracts\Workflow\ImageSubjectInterface;
 use Survos\DataContracts\Workflow\TextSubjectInterface;
 use Survos\DataContracts\Workflow\WorkflowSubjectInterface;
-use Survos\StateBundle\Traits\MarkingInterface;
-use Survos\StateBundle\Traits\MarkingTrait;
 
 /**
  * An ad-hoc, non-persisted workflow subject wrapping a single URL and/or some text.
@@ -25,10 +23,8 @@ use Survos\StateBundle\Traits\MarkingTrait;
  *
  * @author Tac Tacelosky <tacman@gmail.com>
  */
-final class UrlSubject implements WorkflowSubjectInterface, ImageSubjectInterface, TextSubjectInterface, ContextSubjectInterface, MarkingInterface
+final class UrlSubject implements WorkflowSubjectInterface, ImageSubjectInterface, TextSubjectInterface, ContextSubjectInterface
 {
-    use MarkingTrait;
-
     /**
      * @param array<string, mixed> $context
      */

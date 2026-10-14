@@ -1,4 +1,5 @@
 survos_tabler:
+    menu_renderer: survos
     app:
         code: ai-pipeline-demo
         title: AI Workflow Demo

@@ -26,7 +26,6 @@ return [
     Symfony\UX\Icons\UXIconsBundle::class => ['all' => true],
     Knp\Bundle\MenuBundle\KnpMenuBundle::class => ['all' => true],
     Survos\TablerBundle\SurvosTablerBundle::class => ['all' => true],
-    Survos\StateBundle\SurvosStateBundle::class => ['all' => true],
     Survos\MediaBundle\SurvosMediaBundle::class => ['all' => true],
     Survos\JsTwigBundle\SurvosJsTwigBundle::class => ['all' => true],
     Survos\ImgproxyBundle\SurvosImgproxyBundle::class => ['all' => true],
@@ -35,4 +34,7 @@ return [
     Survos\FetchBundle\SurvosFetchBundle::class => ['all' => true],
     Survos\IiifBundle\SurvosIiifBundle::class => ['all' => true],
     Survos\Grid\SurvosGridBundle::class => ['all' => true],
+    Survos\MenuBundle\SurvosMenuBundle::class => ['all' => true],
+    Survos\WorkflowExtrasBundle\SurvosWorkflowExtrasBundle::class => ['all' => true],
+    Survos\WorkflowMessengerBundle\SurvosWorkflowMessengerBundle::class => ['all' => true],
 ];
