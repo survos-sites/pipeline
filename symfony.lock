@@ -124,9 +124,6 @@
     "survos/menu-bundle": {
         "version": "2.42.7"
     },
-    "survos/state-bundle": {
-        "version": "2.11.4"
-    },
     "survos/tabler-bundle": {
         "version": "2.19.2"
     },

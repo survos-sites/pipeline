@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3482704a00e748b2198998afb4380753",
+    "content-hash": "fac83b2f9b9831f22e6929c122eed5df",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -4806,16 +4806,16 @@
         },
         {
             "name": "survos/ai-workflow-bundle",
-            "version": "2.41.9",
+            "version": "2.42.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/ai-workflow-bundle.git",
-                "reference": "4354e91f7b2bfb70a7a0bf0a9e4a6080357c1f09"
+                "reference": "d213d395ca07c51c1ecbe5e11e44fe9c34db547b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/ai-workflow-bundle/zipball/4354e91f7b2bfb70a7a0bf0a9e4a6080357c1f09",
-                "reference": "4354e91f7b2bfb70a7a0bf0a9e4a6080357c1f09",
+                "url": "https://api.github.com/repos/survos/ai-workflow-bundle/zipball/d213d395ca07c51c1ecbe5e11e44fe9c34db547b",
+                "reference": "d213d395ca07c51c1ecbe5e11e44fe9c34db547b",
                 "shasum": ""
             },
             "require": {
@@ -4824,22 +4824,25 @@
                 "survos/claims-bundle": "^2.5",
                 "survos/data-contracts": "^2.5",
                 "survos/kit-bundle": "^2.33",
-                "survos/state-bundle": "^2.5",
+                "survos/menu-bundle": "^2.42.7",
+                "survos/workflow-extras-bundle": "^2.42.8",
+                "survos/workflow-messenger-bundle": "^2.42.9",
                 "symfony/ai-agent": "^0.14",
                 "symfony/ai-bundle": "^0.14",
                 "symfony/ai-mistral-platform": "^0.14",
                 "symfony/ai-open-ai-platform": "^0.14",
-                "symfony/dependency-injection": "^8.1",
-                "symfony/framework-bundle": "^8.1",
-                "symfony/http-client": "^8.1",
-                "symfony/messenger": "^8.1",
+                "symfony/dependency-injection": "8.2.*@dev",
+                "symfony/framework-bundle": "8.2.*@dev",
+                "symfony/http-client": "8.2.*@dev",
+                "symfony/messenger": "8.2.*@dev",
                 "symfony/service-contracts": "^3.6",
-                "symfony/twig-bundle": "^8.1",
+                "symfony/twig-bundle": "8.2.*@dev",
+                "symfony/workflow": "8.2.*@dev",
                 "twig/twig": "^3.0|^4.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^13.0",
-                "survos/tabler-bundle": "^2.5"
+                "survos/tabler-bundle": "^2.42.9"
             },
             "suggest": {
                 "survos/imgproxy-bundle": "Signed imgproxy URL generation — implement AiThumbnailProviderInterface using ImgproxyUrlBuilder"
@@ -4847,7 +4850,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "symfony": {
-                    "require": "^8.0"
+                    "require": "8.2.*"
                 }
             },
             "autoload": {
@@ -4859,7 +4862,7 @@
             "license": [
                 "MIT"
             ],
-            "description": "State-bundle workflow primitives for async AI preparation, observation, analysis, and publishing.",
+            "description": "Symfony workflow primitives for async AI preparation, observation, analysis, and publishing.",
             "keywords": [
                 "ai",
                 "analysis",
@@ -4871,7 +4874,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/ai-workflow-bundle/issues",
-                "source": "https://github.com/survos/ai-workflow-bundle/tree/2.41.9"
+                "source": "https://github.com/survos/ai-workflow-bundle/tree/2.42.13"
             },
             "funding": [
                 {
@@ -4879,7 +4882,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-13T13:09:50+00:00"
+            "time": "2026-10-14T20:31:31+00:00"
         },
         {
             "name": "survos/atlas-bundle",
@@ -5803,16 +5806,16 @@
         },
         {
             "name": "survos/media-bundle",
-            "version": "2.42.5",
+            "version": "2.42.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/media-bundle.git",
-                "reference": "51840c00a57e1263e6739f14400d42c374e27221"
+                "reference": "8eb82b825e6d47a2762f8f91876ce06462b32b1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/media-bundle/zipball/51840c00a57e1263e6739f14400d42c374e27221",
-                "reference": "51840c00a57e1263e6739f14400d42c374e27221",
+                "url": "https://api.github.com/repos/survos/media-bundle/zipball/8eb82b825e6d47a2762f8f91876ce06462b32b1a",
+                "reference": "8eb82b825e6d47a2762f8f91876ce06462b32b1a",
                 "shasum": ""
             },
             "require": {
@@ -5825,26 +5828,29 @@
                 "survos/iiif-bundle": "^2.7",
                 "survos/imgproxy-bundle": "^2.28.6",
                 "survos/kit-bundle": "^2.5",
-                "survos/state-bundle": "^2.0",
-                "symfony/config": "^8.1",
-                "symfony/dependency-injection": "^8.1",
-                "symfony/http-kernel": "^8.1",
-                "symfony/messenger": "^8.1",
-                "symfony/remote-event": "^8.1",
+                "survos/menu-bundle": "^2.42.7",
+                "survos/workflow-extras-bundle": "^2.42.8",
+                "survos/workflow-messenger-bundle": "^2.42.9",
+                "symfony/config": "8.2.*@dev",
+                "symfony/dependency-injection": "8.2.*@dev",
+                "symfony/http-kernel": "8.2.*@dev",
+                "symfony/messenger": "8.2.*@dev",
+                "symfony/remote-event": "8.2.*@dev",
                 "symfony/ux-twig-component": "^3.0",
-                "symfony/webhook": "^8.1",
+                "symfony/webhook": "8.2.*@dev",
+                "symfony/workflow": "8.2.*@dev",
                 "twig/twig": "^3.4|^4.0"
             },
             "require-dev": {
                 "nyholm/psr7": "^1.8",
                 "openai-php/client": "^v0.19.0",
                 "phpstan/phpstan": "^2.0",
-                "symfony/browser-kit": "^8.1",
-                "symfony/framework-bundle": "^8.1",
-                "symfony/http-client": "^8.1",
-                "symfony/phpunit-bridge": "^8.1",
-                "symfony/twig-bundle": "^8.1",
-                "symfony/var-dumper": "^8.1"
+                "symfony/browser-kit": "8.2.*@dev",
+                "symfony/framework-bundle": "8.2.*@dev",
+                "symfony/http-client": "8.2.*@dev",
+                "symfony/phpunit-bridge": "8.2.*@dev",
+                "symfony/twig-bundle": "8.2.*@dev",
+                "symfony/var-dumper": "8.2.*@dev"
             },
             "suggest": {
                 "survos/tabler-bundle": "Admin navbar menu and the search/UI templates. Optional: MediaMenuSubscriber is only registered when TablerBundle is present (config/services.php), so a headless/CLI client does not need it. Was ^2.5.",
@@ -5868,7 +5874,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/media-bundle/issues",
-                "source": "https://github.com/survos/media-bundle/tree/2.42.5"
+                "source": "https://github.com/survos/media-bundle/tree/2.42.13"
             },
             "funding": [
                 {
@@ -5876,7 +5882,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-14T11:51:26+00:00"
+            "time": "2026-10-14T20:31:32+00:00"
         },
         {
             "name": "survos/menu-bundle",
@@ -5950,93 +5956,6 @@
                 }
             ],
             "time": "2026-10-14T16:57:08+00:00"
-        },
-        {
-            "name": "survos/state-bundle",
-            "version": "2.42.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/survos/state-bundle.git",
-                "reference": "c88992da79350e9c1a9ce0bc7dec75ec03d08437"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/survos/state-bundle/zipball/c88992da79350e9c1a9ce0bc7dec75ec03d08437",
-                "reference": "c88992da79350e9c1a9ce0bc7dec75ec03d08437",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/orm": "^3.7",
-                "php": "^8.5",
-                "survos/kit-bundle": "^2.5",
-                "symfony/console": "^7.4||^8.1",
-                "symfony/http-kernel": "^7.4||^8.1",
-                "symfony/messenger": "^7.4||^8.1",
-                "symfony/process": "^7.4||^8.1",
-                "symfony/string": "^7.4||^8.1",
-                "symfony/workflow": "^7.4||^8.1",
-                "symfony/yaml": "^7.4||^8.1"
-            },
-            "require-dev": {
-                "nette/php-generator": "^4.1",
-                "phpstan/phpstan": "^2.0",
-                "phpunit/phpunit": "^13.0",
-                "psr/log": "^3.0",
-                "roave/better-reflection": "^6.0",
-                "survos/tabler-bundle": "^2.5",
-                "symfony/browser-kit": "^7.4||^8.1",
-                "symfony/config": "^7.4||^8.1",
-                "symfony/dependency-injection": "^7.4||^8.1",
-                "symfony/form": "^7.4||^8.1",
-                "symfony/framework-bundle": "^7.4||^8.1",
-                "symfony/maker-bundle": "^1.5",
-                "symfony/twig-bundle": "^7.4||^8.1",
-                "symfony/ux-chartjs": "^3",
-                "symfony/var-dumper": "^7.4||^8.1",
-                "zenstruck/class-metadata": "^1.1",
-                "zenstruck/messenger-monitor-bundle": "^v0.6.0"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "symfony": {
-                    "allow-contrib": true
-                },
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Survos\\StateBundle\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tac Tacelosky",
-                    "email": "tacman@gmail.com"
-                }
-            ],
-            "description": "Add some tools managing state machines using the Symfony Workflow Component",
-            "keywords": [
-                "symfony",
-                "symfony-ux",
-                "workflow"
-            ],
-            "support": {
-                "issues": "https://github.com/survos/state-bundle/issues",
-                "source": "https://github.com/survos/state-bundle/tree/2.42.5"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/kbond",
-                    "type": "github"
-                }
-            ],
-            "time": "2026-10-14T13:43:34+00:00"
         },
         {
             "name": "survos/tabler-bundle",
@@ -6145,16 +6064,16 @@
         },
         {
             "name": "survos/workflow-extras-bundle",
-            "version": "2.42.8",
+            "version": "2.42.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/workflow-extras-bundle.git",
-                "reference": "7c0ccfa0808e240df9985fe2907e000e9178183b"
+                "reference": "3a600192b25512ed93627be61c701dabed241a47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/workflow-extras-bundle/zipball/7c0ccfa0808e240df9985fe2907e000e9178183b",
-                "reference": "7c0ccfa0808e240df9985fe2907e000e9178183b",
+                "url": "https://api.github.com/repos/survos/workflow-extras-bundle/zipball/3a600192b25512ed93627be61c701dabed241a47",
+                "reference": "3a600192b25512ed93627be61c701dabed241a47",
                 "shasum": ""
             },
             "require": {
@@ -6197,7 +6116,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/workflow-extras-bundle/issues",
-                "source": "https://github.com/survos/workflow-extras-bundle/tree/2.42.8"
+                "source": "https://github.com/survos/workflow-extras-bundle/tree/2.42.13"
             },
             "funding": [
                 {
@@ -6205,20 +6124,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-14T17:57:02+00:00"
+            "time": "2026-10-14T20:31:30+00:00"
         },
         {
             "name": "survos/workflow-messenger-bundle",
-            "version": "2.42.9",
+            "version": "2.42.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/workflow-messenger-bundle.git",
-                "reference": "d7ca7cdb838bc807171f9afcac6156e9dd311815"
+                "reference": "0739e2847a08ac77959ff7a1cd0eb393cb7eb07c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/workflow-messenger-bundle/zipball/d7ca7cdb838bc807171f9afcac6156e9dd311815",
-                "reference": "d7ca7cdb838bc807171f9afcac6156e9dd311815",
+                "url": "https://api.github.com/repos/survos/workflow-messenger-bundle/zipball/0739e2847a08ac77959ff7a1cd0eb393cb7eb07c",
+                "reference": "0739e2847a08ac77959ff7a1cd0eb393cb7eb07c",
                 "shasum": ""
             },
             "require": {
@@ -6262,7 +6181,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/workflow-messenger-bundle/issues",
-                "source": "https://github.com/survos/workflow-messenger-bundle/tree/2.42.9"
+                "source": "https://github.com/survos/workflow-messenger-bundle/tree/2.42.13"
             },
             "funding": [
                 {
@@ -6270,7 +6189,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-14T18:05:31+00:00"
+            "time": "2026-10-14T20:30:53+00:00"
         },
         {
             "name": "symfony/ai-agent",
