@@ -1,0 +1,19 @@
+{
+  "name": "rnzaf-handwriting-v1",
+  "reference_policy": "Unchanged human FromThePage references. Alignment visually checked by AI before new model runs; not independent human adjudication. Scores measure agreement, not ground-truth accuracy.",
+  "alignments": [
+    {"page_id":"32783703","institution_id":"FL64924527","sequence":4,"anchor":"Vivian Roberts EADY; 413828; Vol. 4 EA-GW annotation","regions":[
+      {"id":"eady-page-1","crop":[2230,90,2070,3460],"group":"full-page","notes":"Human reference orders handwritten header before typed JC/NF; reading-order differences may affect scores."},
+      {"id":"eady-pencil-heading","crop":[3710,205,480,200],"group":"handwriting-region","reference_excerpt":"12848 Vol. 4\nEA-GW.","notes":"Faint pencil numbers and volume annotation; human punctuation and spacing retained."}
+    ]},
+    {"page_id":"32783704","institution_id":"FL64924856","sequence":5,"anchor":"Eady continuation; 792 hours; file reference 5/2/6127 and handwritten A.S.2","regions":[
+      {"id":"eady-page-2","crop":[2240,90,2100,3460],"group":"full-page","notes":"Includes typed continuation and handwritten file annotation."},
+      {"id":"eady-file-annotation","crop":[2485,3310,550,170],"group":"handwriting-region","reference_excerpt":"792 hours.\n5/2/6127 A.S.2.","notes":"Mixed typed text and handwritten A.S.2.; original reference spacing retained."}
+    ]},
+    {"page_id":"32783706","institution_id":"FL64924653","sequence":7,"anchor":"Clutha Charles EALAM; 424231; Quebec and returned corrections; 532 hours annotation","regions":[
+      {"id":"ealam-page","crop":[2240,90,2100,3460],"group":"full-page","notes":"Reference has 19323 for visible 1923 and includes crossed-out material. Diagnostic agreement only."},
+      {"id":"ealam-address","crop":[3070,3070,600,270],"group":"handwriting-region","reference_excerpt":"Mrs.J.Ealam, (W)\n29 Blighs Road,\nPapanui,\nCHRISTCHURCH.","notes":"Typed address with handwritten (W); human spacing retained."},
+      {"id":"ealam-hours","crop":[2400,3195,620,170],"group":"editorial-diagnostic","reference_excerpt":"532 hours as W/Tops.","notes":"Handwriting with a cancelled older number. Human reference omits cancelled number and renders W/Tops.; not included in primary region score."}
+    ]}
+  ]
+}

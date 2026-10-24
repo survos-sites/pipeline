@@ -35,11 +35,18 @@ final class BenchmarkRunCommand
         #[Argument('New output directory')] string $output,
         #[Option('Use Mistral OCR content input instead of vision messages')] bool $ocr = false,
         #[Option('Comma-separated page IDs; default all')] string $pages = '',
+        #[Option('Known catalog model whose class/capabilities apply to an explicit version ID')] ?string $modelTemplate = null,
     ): int {
         if (!$this->platforms->has($platform) || file_exists($output)) {
             throw new \InvalidArgumentException('Choose a configured platform and a new output directory.');
         }
         $data = json_decode(file_get_contents($manifest), true, flags: JSON_THROW_ON_ERROR);
+        $aiPlatform = $this->platforms->get($platform);
+        $requestedModel = $model;
+        if (null !== $modelTemplate) {
+            $template = $aiPlatform->getModelCatalog()->getModel($modelTemplate);
+            $requestedModel = new ($template::class)($model, $template->getCapabilities(), $template->getOptions());
+        }
         $selected = '' === $pages ? array_column($data['pages'], 'id') : explode(',', $pages);
         if (array_diff($selected, array_column($data['pages'], 'id'))) {
             throw new \InvalidArgumentException('Unknown page IDs.');
@@ -48,6 +55,7 @@ final class BenchmarkRunCommand
         $fs->mkdir($output);
         $report = [
             'started_at' => gmdate(DATE_ATOM), 'platform' => $platform, 'requested_model' => $model,
+            'model_template' => $modelTemplate,
             'manifest_sha256' => hash_file('sha256', $manifest), 'input_mode' => $ocr ? 'ocr' : 'vision',
             'prompt' => $ocr ? null : self::PROMPT,
             'normalization' => 'NFC and collapsed whitespace only; case/punctuation/Markdown retained',
@@ -68,7 +76,7 @@ final class BenchmarkRunCommand
             try {
                 $image = Image::fromFile($imagePath);
                 $input = $ocr ? new ImageUrl($image->asDataUrl()) : new MessageBag(Message::ofUser(self::PROMPT, $image));
-                $result = $this->platforms->get($platform)->invoke($model, $input)->getResult();
+                $result = $aiPlatform->invoke($requestedModel, $input)->getResult();
                 $raw = $result->getRawResult()?->getData();
                 $this->write($output.'/'.$page['id'].'.raw.json', $raw ?? []);
                 $content = $result->getContent();
@@ -79,6 +87,8 @@ final class BenchmarkRunCommand
                 $fs->dumpFile($output.'/'.$page['id'].'.txt', $text);
                 $report['pages'][] = [
                     'id' => $page['id'], 'seconds' => microtime(true) - $start,
+                    'evaluation_group' => $page['evaluation_group'] ?? 'full-page',
+                    'image_sha256' => $page['image_sha256'], 'reference_sha256' => $page['reference_sha256'],
                     'returned_model' => $raw['model'] ?? null, 'usage' => $raw['usage'] ?? $raw['usage_info'] ?? null,
                     'handwriting' => $page['handwriting'],
                     ...$this->metrics->score(file_get_contents($referencePath), $text),
