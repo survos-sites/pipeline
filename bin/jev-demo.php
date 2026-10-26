@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use Symfony\AI\Platform\Bridge\TypeSafe\Evaluation;
+use Symfony\AI\Platform\Bridge\Decision\Evaluation;
 use Symfony\AI\Platform\Bridge\TypeSafe\Factory;
-use Symfony\AI\Platform\Bridge\TypeSafe\Question\ChoiceQuestion;
-use Symfony\AI\Platform\Bridge\TypeSafe\Question\NoulQuestion;
-use Symfony\AI\Platform\Bridge\TypeSafe\Question\ScoreQuestion;
+use Symfony\AI\Platform\Bridge\Decision\Question\ChoiceQuestion;
+use Symfony\AI\Platform\Bridge\Decision\Question\NoulQuestion;
+use Symfony\AI\Platform\Bridge\Decision\Question\ScoreQuestion;
 use Symfony\Component\Dotenv\Dotenv;
 
 require dirname(__DIR__).'/vendor/autoload.php';

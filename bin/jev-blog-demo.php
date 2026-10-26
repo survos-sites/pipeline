@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Symfony\AI\Platform\Bridge\TypeSafe\Evaluation;
+use Symfony\AI\Platform\Bridge\Decision\Evaluation;
 use Symfony\AI\Platform\Bridge\TypeSafe\Factory;
-use Symfony\AI\Platform\Bridge\TypeSafe\Question\NoulQuestion;
+use Symfony\AI\Platform\Bridge\Decision\Question\NoulQuestion;
 use Symfony\AI\Store\Document\Loader\RssFeedLoader;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Dotenv\Dotenv;

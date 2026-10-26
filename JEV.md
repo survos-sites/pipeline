@@ -1,9 +1,8 @@
 # Jev demo
 
-The demo uses published Symfony AI 0.14 releases installed through Composer:
-AI platform, bundle, and agent are locked to `v0.14.1`; the TypeSafe bridge and
-AI store are locked to `v0.14.0`. The requirements use `^0.14`, without development
-branches or version aliases. TypeSafe support is included in these tagged releases.
+The demo targets published Symfony AI 0.15 releases with `^0.15` requirements.
+Evaluation, question, and answer types use the shared `Bridge\Decision` namespace;
+the factory and `ai.platform.typesafe` service remain in the TypeSafe bridge.
 
 Run `composer install` to install the versions recorded in `composer.lock`.
 
