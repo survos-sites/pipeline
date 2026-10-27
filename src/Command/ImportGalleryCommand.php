@@ -9,6 +9,7 @@ use App\Repository\GalleryImageRepository;
 use App\Service\GalleryImageCache;
 use Doctrine\ORM\EntityManagerInterface;
 use Survos\AiWorkflowBundle\Task\Observation\ObserveTask;
+use Survos\AiWorkflowBundle\Workflow\SubjectFlow;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Attribute\Option;
@@ -31,7 +32,7 @@ final class ImportGalleryCommand
     public function __invoke(
         SymfonyStyle $io,
         #[Argument('manifest path, relative to project root')] string $manifest = 'public/data/images.json',
-        #[Option('replace current workflow queues with the default observe task queue')] bool $queue = false,
+        #[Option('append the default observe task without replacing existing queues')] bool $queue = false,
         #[Option('skip caching source images locally for AI tools')] bool $skipDownload = false,
     ): int {
         $path = str_starts_with($manifest, '/') ? $manifest : $this->projectDir . '/' . $manifest;
@@ -69,7 +70,7 @@ final class ImportGalleryCommand
             }
 
             if ($queue) {
-                $image->addPendingStep(ObserveTask::TASK);
+                $image->addPendingStep(ObserveTask::TASK, SubjectFlow::TRANSITION_OBSERVE);
             }
 
             if (!$skipDownload) {

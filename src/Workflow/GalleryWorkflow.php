@@ -9,9 +9,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Survos\AiWorkflowBundle\Task\Observation\AnnotateHandwritingTask;
 use Survos\AiWorkflowBundle\Task\Observation\ObserveHiresTask;
 use Survos\AiWorkflowBundle\Task\Observation\ObserveTask;
+use Survos\AiWorkflowBundle\Task\Observation\OcrMistralTask;
+use Survos\AiWorkflowBundle\Task\Observation\OcrTask;
 use Survos\AiWorkflowBundle\Task\Observation\TranscribeHandwritingTask;
 use Survos\AiWorkflowBundle\Task\TaskRegistry;
-use Survos\AiWorkflowBundle\Task\TaskRunner;
 use Survos\AiWorkflowBundle\Workflow\SubjectFlow;
 use Survos\DataContracts\Metadata\ContentType;
 use Survos\ImgproxyBundle\Service\ImgproxyUrlBuilder;
@@ -22,7 +23,7 @@ final class GalleryWorkflow
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly TaskRunner $taskRunner,
+        private readonly GalleryTaskRunner $taskRunner,
         private readonly TaskRegistry $taskRegistry,
         private readonly ImgproxyUrlBuilder $imgproxy,
     ) {
@@ -46,20 +47,27 @@ final class GalleryWorkflow
         $nextTask = $image->pendingSteps[SubjectFlow::TRANSITION_OBSERVE][0] ?? null;
         $image->resolvedImageUrl = match ($nextTask) {
             ObserveHiresTask::TASK,
+            OcrMistralTask::TASK,
+            OcrTask::TASK,
             TranscribeHandwritingTask::TASK,
             AnnotateHandwritingTask::TASK => $this->resolveHighResUrl($image),
             default                       => $this->resolveThumbnailUrl($image),
         };
 
-        $this->taskRunner->runNext($image);
+        try {
+            $ran = $this->taskRunner->runNext($image, textClaimId: $event->getContext()['text_claim_id'] ?? null);
+        } finally {
+            $image->resolvedImageUrl = null;
+        }
 
-        $image->resolvedImageUrl = null;
+        // Make this observation's claims visible to the fallback policy's repository lookup.
+        $this->entityManager->flush();
 
         // If observe produced no analysis tasks, apply content-type defaults
-        if ($image->pendingCount(SubjectFlow::TRANSITION_OBSERVE) === 0
+        if ($ran !== null && $image->pendingCount(SubjectFlow::TRANSITION_OBSERVE) === 0
             && $image->pendingCount(SubjectFlow::TRANSITION_ANALYZE) === 0
         ) {
-            $contentType = $image->getWorkflowContext()['content_type'] ?? null;
+            $contentType = $this->taskRunner->context($image)['content_type'] ?? null;
             foreach ($this->defaultAnalysisTasks($contentType) as $task) {
                 if ($this->taskRegistry->has($task)) {
                     $image->addPendingStep($task, SubjectFlow::TRANSITION_ANALYZE);
@@ -76,7 +84,7 @@ final class GalleryWorkflow
     {
         $image = $this->getImage($event);
 
-        $this->taskRunner->runNext($image, SubjectFlow::TRANSITION_ANALYZE);
+        $this->taskRunner->runNext($image, SubjectFlow::TRANSITION_ANALYZE, $event->getContext()['text_claim_id'] ?? null);
 
         $this->entityManager->persist($image);
         $this->entityManager->flush();

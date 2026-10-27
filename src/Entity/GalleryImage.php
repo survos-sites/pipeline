@@ -107,7 +107,8 @@ class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, C
 
     public function getWorkflowSubjectType(): string
     {
-        return (new \ReflectionClass(static::class))->getShortName();
+        // Durable claim identity; do not change for Doctrine proxy classes.
+        return 'GalleryImage';
     }
 
     public function getWorkflowScope(): ?string
@@ -133,13 +134,18 @@ class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, C
 
     public function getWorkflowContext(): array
     {
+        $metadata = is_array($this->legacy['metadata'] ?? null) ? $this->legacy['metadata'] : [];
+
         return [
             'title' => $this->title,
             'collection' => $this->collection,
             'local_file_url' => $this->localOriginalPath && is_file($this->localOriginalPath)
                 ? 'file://' . $this->localOriginalPath
                 : null,
-        ];
+        ] + array_intersect_key($metadata, array_flip([
+            'description', 'caption', 'date', 'creator', 'publisher', 'language',
+            'country', 'city', 'place', 'source_tags', 'type', 'content_type',
+        ]));
     }
 
     public function getDisplayUrl(): string

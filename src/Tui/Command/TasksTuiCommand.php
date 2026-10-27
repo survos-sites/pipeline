@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tui\Command;
 
+use App\Workflow\TaskInputResolver;
+
 use App\Workflow\UrlSubject;
 use Survos\AiWorkflowBundle\Task\AbstractCapabilityTask;
 use Survos\AiWorkflowBundle\Task\AbstractPromptTask;
@@ -56,6 +58,7 @@ final class TasksTuiCommand extends Command
     public function __construct(
         private readonly TaskRegistry $taskRegistry,
         private readonly ImgproxyUrlBuilder $imgproxy,
+        private readonly TaskInputResolver $taskInputs,
     ) {
         parent::__construct();
     }
@@ -272,7 +275,7 @@ final class TasksTuiCommand extends Command
 
         if ($task instanceof AbstractPromptTask) {
             try {
-                [$system, $user] = $task->buildPrompts($subject);
+                [$system, $user] = $task->buildPrompts($this->taskInputs->resolve($task->getTask(), $subject));
                 $md .= $this->fence('System prompt', $system, 900);
                 $md .= $this->fence('User prompt', $user, 700);
             } catch (\Throwable $e) {
@@ -292,12 +295,12 @@ final class TasksTuiCommand extends Command
         if (null === $task) {
             return '❌ Task is no longer registered.';
         }
-        if (!$task->supports($subject)) {
-            return "⚠️ Task does not support this input — its shape needs more than what you supplied.";
-        }
-
         try {
-            $result = $task->run($subject);
+            $prepared = $this->taskInputs->resolve($task->getTask(), $subject);
+            if (!$task->supports($prepared)) {
+                return "⚠️ Task does not support the prepared inputs.";
+            }
+            $result = $task->run($prepared);
         } catch (\Throwable $e) {
             return \sprintf("❌ **Run failed:**\n\n```\n%s\n```", $e->getMessage());
         }

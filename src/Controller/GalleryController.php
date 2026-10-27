@@ -51,7 +51,7 @@ final class GalleryController extends AbstractController
         return [
             'image' => $image,
             'transitions' => $registry->get($image, SubjectFlow::WORKFLOW_NAME)->getEnabledTransitions($image),
-            'claimSubjectType' => GalleryImage::class,
+            'claimSubjectType' => $image->getWorkflowSubjectType(),
             'claimSubjectId' => $image->code,
         ];
     }
