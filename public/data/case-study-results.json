@@ -1,0 +1,152 @@
+{
+    "ink-pythias": {
+        "title": "Knights of Pythias — Audubon County Journal, June 29, 1911",
+        "source_url": "case-studies/inkstory/page.jpg",
+        "letter_state": null,
+        "runs": [
+            {
+                "task": "source:inkstory@1",
+                "model": null,
+                "duration_ms": 0,
+                "input_tokens": 0,
+                "output_tokens": 0,
+                "claims": [
+                    {
+                        "predicate": "ai:ocrText",
+                        "value": "## KNIGHTS OF PYTHIAS\n\n### Of Exira, Iowa, Were Entertained At The Audubon Lodge Wed day Night June 28th.\n\nTbe Knights of Pythias of Exira Lodge No. 181 were eutertained at the Audubon Lodge last oight. Giand Chancellor Dr. J. M. Cole delivered a very tine and helpful address after which Past Grand Chancellor B. I. Sallinger was called oa for a little talk and responded with an interesting speech.\n\nThe Lodge then resumed its duties and the Rank of Knighthood was conferred upon Mr. llenry I£ngle of Exira.\n\nThe evening ended with a fine two course luncheon prepared by the Audubon ladies and all partook to their stomach's content.\n\nIn tbe wee small hours of the night we bid farewell to tbe Audubon boys feeling that there was no tie that bound like \"Pythian Love.\" We sure thank the Audubon boyB for the \"Royal Good Time\" they gave us aud extend a cordial invitation to all of them to cotne and visit with ua."
+                    }
+                ]
+            },
+            {
+                "task": "extract_metadata@1.0",
+                "model": "gpt-4o-mini-2024-07-18",
+                "duration_ms": 6339,
+                "input_tokens": 1343,
+                "output_tokens": 501,
+                "claims": [
+                    {
+                        "predicate": "dcterms:title",
+                        "value": "Knights of Pythias Annual Meeting"
+                    },
+                    {
+                        "predicate": "dcterms:description",
+                        "value": "This article from the Audubon County Journal outlines an event hosted by the Knights of Pythias of Exira Lodge No. 181 at the Audubon Lodge on June 28, 1911. It details speeches delivered by Grand Chancellor Dr. J. M. Cole and Past Grand Chancellor B. I. Sallinger, as well as the conferring of the Rank of Knighthood on Mr. Henry Engle. The evening concluded with a two-course luncheon and a sense of camaraderie among attendees."
+                    },
+                    {
+                        "predicate": "ai:denseSummary",
+                        "value": "On June 28, 1911, Knights of Pythias Lodge No. 181 from Exira gathered at Audubon Lodge. Speeches were given by Dr. J. M. Cole and B. I. Sallinger, culminating in the conferring of knighthood to Henry Engle."
+                    },
+                    {
+                        "predicate": "dcterms:language",
+                        "value": "en"
+                    },
+                    {
+                        "predicate": "dcterms:date",
+                        "value": "1911"
+                    }
+                ]
+            },
+            {
+                "task": "summarize@1.0",
+                "model": "gpt-4o-mini-2024-07-18",
+                "duration_ms": 1941,
+                "input_tokens": 461,
+                "output_tokens": 116,
+                "claims": [
+                    {
+                        "predicate": "dcterms:abstract",
+                        "value": "This newspaper article from the Audubon County Journal dated June 29, 1911, reports on a gathering of the Knights of Pythias of Exira Lodge No. 181 at the Audubon Lodge. The event featured speeches from Grand Chancellor Dr. J. M. Cole and Past Grand Chancellor B. I. Sallinger, along with the conferral of the Rank of Knighthood on Mr. Henry Engle. The evening concluded with a two-course luncheon prepared by the Audubon ladies, fostering camaraderie among attendees."
+                    },
+                    {
+                        "predicate": "dcterms:language",
+                        "value": "en"
+                    }
+                ]
+            }
+        ]
+    },
+    "nara-193049": {
+        "title": "William Burnett letter — May 24, 1726",
+        "source_url": "https://catalog.archives.gov/medialive/49/1930/193049/content/arcmedia/media/images/40/17/40-1611a.gif",
+        "letter_state": "complete",
+        "runs": [
+            {
+                "task": "letter:describe_source@1",
+                "model": "gpt-5.4-2026-03-05",
+                "duration_ms": 10664,
+                "input_tokens": 372,
+                "output_tokens": 345,
+                "claims": [
+                    {
+                        "predicate": "dcterms:description",
+                        "value": "The image shows a single-page document with dark cursive writing on a light, speckled background. The writing appears handwritten throughout. There are no clearly visible printed text elements.\n\nLayout: The text is arranged in several horizontal lines across the upper and central portion of the page, with a larger blank margin near the bottom. The main body consists of dense cursive lines written left to right. Near the lower left/center area, there is a large, more decorative signature-like flourish. On the right side, roughly mid-to-lower area, there is another shorter vertical or clustered pen flourish/mark. At the very bottom left, there is a smaller line of handwriting that appears separate from the main paragraph, possibly a note or endorsement. A horizontal underline or rule appears beneath the large flourish near the lower center.\n\nLegibility: The document is only partly legible. Individual words and fragments can be made out in places, but much of the cursive is difficult to read بسبب the ornate handwriting, tight spacing, and image quality. The script appears dark and fairly bold compared with the page, but the page has visible speckling, stains, or scan noise throughout. The top line and central lines are especially densely written. The bottom note is smaller and also hard to decipher.\n\nVisible condition/details: The page appears aged or reproduced from an older source, with scattered dark flecks and uneven background tone. The edges of the page are visible, and there is slight darkening around parts of the border. Uncertainty: while the lower marks strongly resemble signatures or sign-off flourishes, that cannot be confirmed from appearance alone."
+                    }
+                ]
+            },
+            {
+                "task": "letter:assess_document@1",
+                "model": null,
+                "duration_ms": 0,
+                "input_tokens": 0,
+                "output_tokens": 0,
+                "claims": [
+                    {
+                        "predicate": "ai:documentAssessment",
+                        "value": {
+                            "basis": "NARA item 193049 is titled William Burnett Letter May 24, 1726 and describes it as a handwritten letter. This rule applies only to that catalog item and exact digital object.",
+                            "printed": null,
+                            "handwritten": true,
+                            "correspondence": true
+                        }
+                    }
+                ]
+            },
+            {
+                "task": "letter:htr@1",
+                "model": "gpt-4o-2024-08-06",
+                "duration_ms": 3843,
+                "input_tokens": 706,
+                "output_tokens": 345,
+                "claims": [
+                    {
+                        "predicate": "ai:htrText",
+                        "value": "also saved as by his Majesty[‘s] Command given and\nRoyal Instructions to me and Vice Admiral Hardy\nwas appointed in Nos 99. 100. 101. 102. and 103\ntakes of the said Instructions whereof I have\ngiven you a Copy [torn] under my Hand and\nseal at New York the second day of May in\nthe Sixth Year of his Majesty[‘s] Reign. Amongst\nDominion[‘s] Dominion [torn] Thousand and Twenty Six.\n\nBy his Excellency-[‘s] Command\n\nRobin [torn]\n\nDated New York 24. May 1726. RB.[tear]\n\n[Signature]\n\nRobinson [torn]"
+                    },
+                    {
+                        "predicate": "dcterms:language",
+                        "value": "en"
+                    }
+                ]
+            },
+            {
+                "task": "letter:extract_metadata@1",
+                "model": "gpt-4o-mini-2024-07-18",
+                "duration_ms": 4040,
+                "input_tokens": 2186,
+                "output_tokens": 318,
+                "claims": [
+                    {
+                        "predicate": "dcterms:title",
+                        "value": "William Burnett letter — May 24, 1726"
+                    },
+                    {
+                        "predicate": "dcterms:description",
+                        "value": "The document is a single-page letter featuring dark cursive handwriting on a light, speckled background. It includes a decorative flourish in the lower left, hinting at a signature, along with dense text mainly concentrated in the upper and central areas of the page. The document appears to be aged, with visible speckles and stains that suggest it may be a reproduction of an older piece."
+                    },
+                    {
+                        "predicate": "ai:denseSummary",
+                        "value": "Handwritten document dated May 24, 1726, by Excellency, possibly William Burnett, from New York. Contains signatures and decorative flourishes, but legibility is limited due to ornate cursive."
+                    },
+                    {
+                        "predicate": "dcterms:language",
+                        "value": "en"
+                    },
+                    {
+                        "predicate": "dcterms:date",
+                        "value": "1726"
+                    }
+                ]
+            }
+        ]
+    }
+}

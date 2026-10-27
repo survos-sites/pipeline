@@ -1,0 +1,63 @@
+[
+  {
+    "code": "ink-pythias",
+    "title": "Knights of Pythias \u2014 Audubon County Journal, June 29, 1911",
+    "url": "case-studies/inkstory/page.jpg",
+    "collection": "Inkstory \u00b7 Library of Congress",
+    "goal": "Extract people, places and a concise summary from an Inkstory clipping, reusing the supplied OCR.",
+    "citation_url": "https://www.loc.gov/resource/sn87057934/1911-06-29/ed-1/?sp=1",
+    "reader_url": "https://inkstory.org/audubon-county-journal/sn87057934-1911-06-29-ed-1",
+    "source_region": [
+      3119,
+      6368,
+      883,
+      1833
+    ],
+    "source_dimensions": [
+      6162,
+      8818
+    ],
+    "source_ocr": "## KNIGHTS OF PYTHIAS\n\n### Of Exira, Iowa, Were Entertained At The Audubon Lodge Wed day Night June 28th.\n\nTbe Knights of Pythias of Exira Lodge No. 181 were eutertained at the Audubon Lodge last oight. Giand Chancellor Dr. J. M. Cole delivered a very tine and helpful address after which Past Grand Chancellor B. I. Sallinger was called oa for a little talk and responded with an interesting speech.\n\nThe Lodge then resumed its duties and the Rank of Knighthood was conferred upon Mr. llenry I\u00a3ngle of Exira.\n\nThe evening ended with a fine two course luncheon prepared by the Audubon ladies and all partook to their stomach's content.\n\nIn tbe wee small hours of the night we bid farewell to tbe Audubon boys feeling that there was no tie that bound like \"Pythian Love.\" We sure thank the Audubon boyB for the \"Royal Good Time\" they gave us aud extend a cordial invitation to all of them to cotne and visit with ua.",
+    "source_blocks": [
+      "TB75",
+      "TB76",
+      "TB77",
+      "TB78",
+      "TB79",
+      "TB80"
+    ],
+    "metadata": {
+      "date": "1911-06-29",
+      "publisher": "Audubon County Journal",
+      "content_type": "newspaper",
+      "description": "Article opening grouped by Inkstory from LOC ALTO blocks TB75\u2013TB80. OCR errors retained."
+    }
+  },
+  {
+    "code": "nara-193049",
+    "title": "William Burnett letter \u2014 May 24, 1726",
+    "url": "https://catalog.archives.gov/medialive/49/1930/193049/content/arcmedia/media/images/40/17/40-1611a.gif",
+    "collection": "NARA \u00b7 John F. Kennedy Personal Papers",
+    "citation_url": "https://catalog.archives.gov/id/193049",
+    "goal": "Assess the handwritten letter, transcribe its text, and extract descriptive metadata with evidence for each step.",
+    "metadata": {
+      "date": "1726-05-24",
+      "creator": "William Burnett",
+      "description": "NARA identifier 193049; digital object 40-1611a.gif. Unrestricted access and use."
+    }
+  },
+  {
+    "code": "nara-196468",
+    "title": "Uncle Sam needs typewriters \u2014 1942",
+    "url": "https://catalog.archives.gov/medialive/68/1964/196468/content/arcmedia/media/images/23/4/23-0395a.gif",
+    "collection": "NARA \u00b7 Franklin D. Roosevelt Library",
+    "citation_url": "https://catalog.archives.gov/id/196468",
+    "goal": "Compare what the photograph alone reveals with what NARA catalog metadata adds.",
+    "catalog_metadata": {
+      "source": "https://catalog.archives.gov/id/196468",
+      "title": "Uncle Sam needs 600,000 typewriters for the armed services and is contacting all possible typewriter users to urge them to release \"1 out of every 4\" typewriters for Army or Navy services.",
+      "year": 1942,
+      "collection": "Franklin D. Roosevelt Library Public Domain Photographs"
+    }
+  }
+]

@@ -1,0 +1,96 @@
+{
+    "image_only": {
+        "description": "Visible evidence; A black-and-white photograph shows two adults standing on a paved street beside the rear of a dark delivery-style vehicle with its back door open. On the left, a man in light-colored work clothes faces the woman and holds a bulky object with both hands; from the image alone, it appears to be equipment or a package rather than something easily identifiable. On the right, a woman in a light skirt suit and dark shoes faces him and appears to be smiling or speaking. The side of the vehicle bears painted lettering, but only part is legible; the clearest visible word appears to be “COFFEE,” while smaller text below is too indistinct to read confidently. Near the curb at lower right are several stacked or scattered dark rectangular items. In the background are trees, a billboard or sign, additional buildings, and a few distant figures or vehicles.\n\nCatalog context; No catalog metadata was supplied with the image. Therefore I cannot attribute a date, location, institution, event, or identities to the scene.\n\nInterpretation and limits; The image suggests a street-side exchange or presentation involving the man, the woman, and the open vehicle, possibly related to commercial delivery because of the van and the visible word “COFFEE.” However, that business connection is inferential, not fully legible from the photograph alone. The exact object being handed over, the relationship between the people, and the purpose of the interaction cannot be determined securely from the image.",
+        "model": "gpt-5.4-2026-03-05",
+        "duration_ms": 9332,
+        "input_tokens": 525,
+        "output_tokens": 311,
+        "cache_hit": false,
+        "source_sha256": "b50a8bc345ea0a55f1cd3f9af1f894ed9cc88bcda030afd1e6de08e94caed520"
+    },
+    "with_metadata": {
+        "description": "Visible evidence; A black-and-white outdoor photograph shows two people beside the open rear of a dark delivery-style vehicle parked at a curb. On the left, a man in a short-sleeved uniform or work clothes stands facing a woman. He appears to be handing her a typewriter or similar office machine; another machine is visible in the open cargo area. The woman wears a light-colored skirt suit and dark shoes and faces him with her hands extended toward the object. Several typewriters are lined up on the ground near the curb at the right edge. Painted lettering is visible on the side of the vehicle, but only part is clearly legible: “OFFICE …” with smaller text below too indistinct to read confidently. In the background are trees, houses or low buildings, and a few distant figures.\n\nCatalog context; The catalog metadata identifies the image as: “Uncle Sam needs 600,000 typewriters for the armed services and is contacting all possible typewriter users to urge them to release ‘1 out of every 4’ typewriters for Army or Navy services.” It dates the image to 1942 and places it in the Franklin D. Roosevelt Library Public Domain Photographs collection. This adds a wartime U.S. mobilization context and suggests the pictured exchange involves collecting typewriters for military use, which is not fully knowable from the image alone.\n\nInterpretation and limits; The image supports a scene of typewriter transfer or pickup, but it does not by itself identify the people, their institution, or the precise location. The catalog’s wartime appeal explains why multiple typewriters are present, yet the exact slogan or organizational affiliation is not fully visible in the photograph.",
+        "model": "gpt-5.4-2026-03-05",
+        "duration_ms": 8551,
+        "input_tokens": 611,
+        "output_tokens": 357,
+        "cache_hit": false,
+        "source_sha256": "b50a8bc345ea0a55f1cd3f9af1f894ed9cc88bcda030afd1e6de08e94caed520"
+    },
+    "capture_context": {
+        "execution": {
+            "provider": "openai",
+            "execution_location": "cloud",
+            "submission_mode": "sync",
+            "agent": "ai.agent.description",
+            "model_requested": "gpt-5.4",
+            "cache_hit": false,
+            "elapsed_ms": 10298,
+            "original_task_ms": 10296,
+            "timing_scope": "task.run: prompt construction, provider round trip and structured output mapping; excludes source download and database writes",
+            "capture_context": {
+                "date": "1942",
+                "date_precision": "year",
+                "provenance": "https://catalog.archives.gov/id/196468"
+            },
+            "catalog_caption": null,
+            "image": {
+                "source_url": "https://catalog.archives.gov/medialive/68/1964/196468/content/arcmedia/media/images/23/4/23-0395a.gif",
+                "transport": "embedded data URI",
+                "rendition": "original NARA catalog GIF; no resizing or monochrome conversion by this app",
+                "mime_type": "image/gif",
+                "width": 487,
+                "height": 600,
+                "byte_count": 87985,
+                "sha256": "b50a8bc345ea0a55f1cd3f9af1f894ed9cc88bcda030afd1e6de08e94caed520",
+                "vision_detail": "not explicitly set",
+                "data_uri_note": "Exact payload is data:<mime_type>;base64,<base64 of cached source bytes>; not duplicated in logs"
+            }
+        },
+        "description": "Visible evidence; A black-and-white street photograph shows two people beside a dark panel van parked at a curb. On the left, a man in a short-sleeved uniform or work clothes stands facing a woman and appears to be handing her a rectangular object or bundle held between them. The woman wears a light-colored jacket and skirt with dark shoes and looks toward him. The van’s rear door on the left side is open, revealing a dark interior. Lettering is painted on the van’s side, but most of it is unclear; the larger word appears to begin with “OFFI…” or “OFFIC…,” though this reading is uncertain. Additional smaller text below is not legible. In the background are trees, low buildings, a few distant figures, and a billboard or sign whose text cannot be read.\n\nCatalog context; The supplied catalog context states the original photograph dates to 1942 (year precision) and gives provenance as the U.S. National Archives catalog record at https://catalog.archives.gov/id/196468. This adds a year for the original image, but it does not by itself make the location, identities, or event visible in the photograph.\n\nInterpretation and limits; The scene suggests an exchange or presentation beside a delivery or service vehicle, but the exact purpose is not visible. The painted van lettering may indicate an office, service, or business vehicle, yet the wording is too indistinct to identify confidently. No legible insignia, street name, or clear landmark confirms where this was taken or who the people are.",
+        "model": "gpt-5.4-2026-03-05",
+        "duration_ms": 10296,
+        "input_tokens": 600,
+        "output_tokens": 329,
+        "cache_hit": false,
+        "source_sha256": "b50a8bc345ea0a55f1cd3f9af1f894ed9cc88bcda030afd1e6de08e94caed520"
+    },
+    "capture_and_caption": {
+        "execution": {
+            "provider": "openai",
+            "execution_location": "cloud",
+            "submission_mode": "sync",
+            "agent": "ai.agent.description",
+            "model_requested": "gpt-5.4",
+            "cache_hit": false,
+            "elapsed_ms": 9288,
+            "original_task_ms": 9287,
+            "timing_scope": "task.run: prompt construction, provider round trip and structured output mapping; excludes source download and database writes",
+            "capture_context": {
+                "date": "1942",
+                "date_precision": "year",
+                "provenance": "https://catalog.archives.gov/id/196468"
+            },
+            "catalog_caption": "Uncle Sam needs 600,000 typewriters for the armed services and is contacting all possible typewriter users to urge them to release \"1 out of every 4\" typewriters for Army or Navy services.",
+            "image": {
+                "source_url": "https://catalog.archives.gov/medialive/68/1964/196468/content/arcmedia/media/images/23/4/23-0395a.gif",
+                "transport": "embedded data URI",
+                "rendition": "original NARA catalog GIF; no resizing or monochrome conversion by this app",
+                "mime_type": "image/gif",
+                "width": 487,
+                "height": 600,
+                "byte_count": 87985,
+                "sha256": "b50a8bc345ea0a55f1cd3f9af1f894ed9cc88bcda030afd1e6de08e94caed520",
+                "vision_detail": "not explicitly set",
+                "data_uri_note": "Exact payload is data:<mime_type>;base64,<base64 of cached source bytes>; not duplicated in logs"
+            }
+        },
+        "description": "Visible evidence; A black-and-white outdoor photograph shows two people beside a dark panel van parked at a curb. A man in short-sleeved work clothes stands at left, facing a woman in a light-colored skirt suit and dark shoes at center-right. He appears to be handing or receiving a portable typewriter-like machine between them. The van’s rear side door is open, exposing a dark interior. Several more typewriters or similar office machines are visible on the ground near the right rear of the vehicle. Painted lettering is visible on the van’s side, but only part is legible; it appears to include “OFFICE” and additional smaller words that cannot be read clearly from this image. In the background are trees, detached houses, and at least one other person near the street.\n\nCatalog context; The supplied capture context dates the original photograph to 1942. The catalog metadata says: “Uncle Sam needs 600,000 typewriters for the armed services and is contacting all possible typewriter users to urge them to release ‘1 out of every 4’ typewriters for Army or Navy services.” This adds a probable wartime salvage or collection campaign involving typewriters, which is not fully explicit from the image alone.\n\nInterpretation and limits; Visually, the scene suggests a pickup or transfer of office equipment from a civilian to a collector or serviceman, but the exact roles of the two people are not proven by the image. The machine appears to be a typewriter, consistent with the catalog, though fine details are limited. No location is provided in the image, and no institutional affiliation, names, or exact wording on the vehicle can be confirmed solely from what is visible.",
+        "model": "gpt-5.4-2026-03-05",
+        "duration_ms": 9287,
+        "input_tokens": 653,
+        "output_tokens": 357,
+        "cache_hit": false,
+        "source_sha256": "b50a8bc345ea0a55f1cd3f9af1f894ed9cc88bcda030afd1e6de08e94caed520"
+    }
+}

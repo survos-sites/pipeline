@@ -98,8 +98,8 @@ class GalleryImage implements WorkflowSubjectInterface, ImageSubjectInterface, C
         $this->sourceUrl = (string) ($row['url'] ?? '');
         $this->collection = isset($row['collection']) ? (string) $row['collection'] : null;
         // Keep app execution state when refreshing provenance from the manifest.
-        $executionState = array_intersect_key($this->legacy, array_flip(['letter_workflow', 'letter_known_assessment']));
-        $this->legacy = array_diff_key($row, array_flip(['letter_workflow', 'letter_known_assessment'])) + $executionState;
+        $executionState = array_intersect_key($this->legacy, array_flip(['letter_workflow', 'letter_known_assessment', 'case_execution', 'photo_comparison']));
+        $this->legacy = array_diff_key($row, array_flip(['letter_workflow', 'letter_known_assessment', 'case_execution', 'photo_comparison'])) + $executionState;
     }
 
     public function getWorkflowSubjectId(): string

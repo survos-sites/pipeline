@@ -6,12 +6,41 @@
 <div class="row g-4">
     <aside class="col-lg-4">
         <div class="card case-source">
-            <img src="{{ image.displayUrl }}" alt="{{ image.title }}" class="case-original">
+            {% if image.legacy.source_region is defined %}
+            {% set r = image.legacy.source_region %}{% set d = image.legacy.source_dimensions %}
+            <div style="position:relative;overflow:hidden;aspect-ratio:{{ r[2] }}/{{ r[3] }}">
+                <img src="{{ image.displayUrl }}" alt="{{ image.title }}" style="position:absolute;width:{{ d[0] / r[2] * 100 }}%;max-width:none;transform:translate(-{{ r[0] / d[0] * 100 }}%,-{{ r[1] / d[1] * 100 }}%)">
+            </div>
+            {% else %}<img src="{{ image.displayUrl }}" alt="{{ image.title }}" class="case-original">{% endif %}
+            <details class="px-3 py-2 small border-top"><summary>Image dimensions and input details</summary>
+                <strong>Image sent to the model</strong>
+                {% set hasRecordedDimensions = false %}
+                {% for run in runs %}
+                    {% set inputImage = run.response.execution.image|default(null) %}
+                    {% if inputImage and inputImage.width is defined and inputImage.height is defined %}
+                        {% set hasRecordedDimensions = true %}
+                        <div class="mt-1">{{ inputImage.width }} × {{ inputImage.height }} px · {{ run.source|split('@')|first|replace({'_': ' '}) }}</div>
+                        <div class="text-secondary">{{ inputImage.rendition|default('Rendition not recorded') }}</div>
+                    {% endif %}
+                {% endfor %}
+                {% if not hasRecordedDimensions %}
+                    {% if image.code == 'ink-pythias' %}
+                        <div>No image sent by the clipping case: metadata extraction and summary use supplied OCR text.</div>
+                    {% else %}<div class="text-secondary">Dimensions not recorded for these runs.</div>{% endif %}
+                {% endif %}
+                {% if image.legacy.source_region is defined %}
+                    <div class="mt-2"><strong>Crop in source coordinates:</strong> {{ r[2] }} × {{ r[3] }} px at x={{ r[0] }}, y={{ r[1] }}.</div>
+                    <div><strong>ALTO coordinate space:</strong> {{ d[0] }} × {{ d[1] }} units. The cached page raster is 2465 × 3528 px; this browser crop represents approximately 353 × 733 raster pixels. No cropped image file is sent.</div>
+                    <div><a href="{{ image.displayUrl }}">Exact display image URL</a>: <code class="text-break">{{ image.displayUrl }}</code></div>
+                    {% if image.code == 'ink-pythias' %}<details class="mt-2"><summary>Supplied OCR input ({{ image.legacy.source_blocks|join(', ') }})</summary><pre class="case-text">{{ image.legacy.source_ocr }}</pre></details>{% endif %}
+                {% endif %}
+            </details>
             <div class="card-body">
                 <div class="case-eyebrow">The source</div>
                 <h2 class="h3 mt-2">{{ image.title }}</h2>
                 <p>{{ image.collection ?? 'Collection not recorded' }}</p>
                 <a href="{{ image.displayUrl }}" target="_blank" rel="noopener">Open source image ↗</a>
+                {% if image.legacy.citation_url is defined %}<p class="mt-2"><a href="{{ image.legacy.citation_url }}">Original catalog / newspaper page ↗</a></p>{% endif %}
             </div>
         </div>
     </aside>
@@ -21,23 +50,39 @@
             <h2>{{ image.legacy.goal|default('Make this source discoverable and useful.') }}</h2>
             <p>Extract text and descriptive metadata while keeping the source and the machine-generated evidence together.</p>
         </section>
-        <h2 class="h3">How we got here</h2>
-        <p class="text-secondary">Latest retained task records, ordered by execution time. Reruns replace earlier records; this is not a complete attempt history.</p>
+        <section class="mb-4"><h2 class="h3">What this makes possible</h2>
+        {% if image.code == 'ink-pythias' %}<p>Make newspaper stories discoverable through names, places and short summaries, using the OCR your collection already provides.</p><p class="small text-secondary">Review needed: the generated title adds “Annual Meeting,” which the supplied text does not establish. Names read from damaged OCR still need checking.</p>
+        {% elseif image.code == 'nara-193049' %}<p>Turn handwriting into a searchable draft transcription, then extract information that helps readers discover the letter.</p><p class="small text-secondary">Review needed: this transcription contains uncertain readings. The current metadata describes appearance more than the letter’s contents; it is not a verified transcription or finished catalog record.</p>
+        {% else %}<p>Describe a photograph and connect visible details with its archival context. Compare how the catalog caption helps explain the typewriter collection campaign.</p>{% endif %}</section>
+        {% if image.legacy.photo_comparison is defined %}
+        <section class="mb-4"><h2 class="h3">Same photo, same model — different context</h2>
+            <p>Both requests receive the catalog date (1942, year precision). No capture location or orientation is known. Only the second receives the NARA campaign caption. One sample per condition; differences can also reflect model variability.</p>
+            <div class="row g-3">{% for key, result in image.legacy.photo_comparison|filter((v, k) => k in ['capture_context', 'capture_and_caption']) %}<div class="col-6"><article class="card h-100"><div class="card-body">
+                <h3>{{ key == 'capture_context' ? 'Image + capture context' : 'Image + capture context + caption' }}</h3>
+                <details class="small text-secondary mb-2"><summary>Model, time and usage</summary>{{ result.model }} · {{ (result.duration_ms / 1000)|number_format(2) }} s · {{ result.input_tokens }} input / {{ result.output_tokens }} output tokens</details>
+                <div class="case-text">{{ result.description }}</div>
+                {% if result.execution is defined %}<details class="mt-3"><summary>Execution and image input</summary><pre>{{ result.execution|json_encode(constant('JSON_PRETTY_PRINT') b-or constant('JSON_UNESCAPED_SLASHES')) }}</pre></details>{% endif %}
+            </div></article></div>{% endfor %}</div>
+        {% if image.legacy.photo_comparison.image_only is defined %}<details class="mt-3"><summary>Earlier pixels-only diagnostic (no capture context)</summary><p class="mt-2"><strong>Human correction:</strong> the vehicle lettering reads “OFFICE,” not “COFFEE.” The caption-assisted result reads “OFFICE”; the original generated reading is preserved below.</p><div class="case-text mt-2">{{ image.legacy.photo_comparison.image_only.description }}</div><p class="small">Original model: {{ image.legacy.photo_comparison.image_only.model }}. Retained unchanged; earlier instructions differ from this comparison.</p></details>{% endif %}
+        </section>
+        {% endif %}
+        <h2 class="h3">Results and steps</h2>
+        <details class="mb-3 small"><summary>About these recorded results</summary>Latest retained task records, ordered by execution time. Reruns replace earlier records; this is not a complete attempt history. Costs are not stored; missing pricing does not mean a free run.</details>
         {% for run in runs %}
         <article class="card mb-3 case-step">
             <div class="card-body">
                 <div class="case-eyebrow">Recorded step {{ loop.index }} · {{ run.createdAt|date('M j, Y H:i:s') }}</div>
                 <h3 class="mt-2">{{ run.source|split('@')|first|replace({'_':' '})|title }}</h3>
-                <dl class="case-metrics">
+                <details class="mb-3"><summary>Model, time and usage</summary><dl class="case-metrics">
                     <div><dt>Model</dt><dd>{{ run.model ?? 'Not recorded' }}</dd></div>
                     <div><dt>Time</dt><dd>{{ run.durationMs is not null ? (run.durationMs / 1000)|number_format(2) ~ ' s' : 'Not recorded' }}</dd></div>
                     <div><dt>Input / output tokens</dt><dd>{{ run.inputTokens ?? '—' }} / {{ run.outputTokens ?? '—' }}</dd></div>
                     <div><dt>Cost</dt><dd>Unavailable</dd></div>
-                </dl>
+                </dl></details>
                 {% set found = false %}
                 {% for claim in claims %}{% if claim.runId == run.id %}
                     {% set found = true %}
-                    <div class="case-output"><div class="small text-secondary mb-1">{{ claim.predicate }}</div>
+                    <div class="case-output"><div class="small text-secondary mb-1">{{ {'dcterms:description': 'Description', 'dcterms:abstract': 'Summary', 'dcterms:title': 'Suggested title', 'dcterms:language': 'Language', 'dcterms:date': 'Date', 'ai:ocrText': 'Supplied text', 'ai:htrText': 'Transcription', 'ai:denseSummary': 'Short summary'}[claim.predicate]|default(claim.predicate) }}</div>
                     {% if claim.value is iterable %}<pre>{{ claim.value|json_encode(constant('JSON_PRETTY_PRINT') b-or constant('JSON_UNESCAPED_UNICODE')) }}</pre>{% else %}<div class="case-text">{{ claim.value is same as(true) ? 'Yes' : (claim.value is same as(false) ? 'No' : (claim.value ?? 'Not recorded')) }}</div>{% endif %}
                     </div>
                 {% endif %}{% endfor %}

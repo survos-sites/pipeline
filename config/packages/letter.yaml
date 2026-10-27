@@ -1,5 +1,15 @@
 parameters:
-    letter.known_decisions: {}
+    letter.known_decisions:
+        nara-193049:
+            source_url: 'https://catalog.archives.gov/medialive/49/1930/193049/content/arcmedia/media/images/40/17/40-1611a.gif'
+            question_revision: document-assessment-v1
+            origin: source
+            reference: 'https://catalog.archives.gov/id/193049'
+            assessment:
+                handwritten: true
+                printed: null
+                correspondence: true
+                basis: 'NARA item 193049 is titled William Burnett Letter May 24, 1726 and describes it as a handwritten letter. This rule applies only to that catalog item and exact digital object.'
     letter.assessment_model: gpt-4o-mini
     letter.description_model: gpt-5.4
     letter.htr_model: gpt-4o

@@ -35,7 +35,7 @@ final class GalleryController extends AbstractController
     public function gallery(GalleryImageRepository $images): array
     {
         return [
-            'images' => $images->findBy([], ['title' => 'ASC']),
+            'images' => $images->findBy(['code' => ['nara-196468', 'nara-193049', 'ink-pythias']], ['title' => 'ASC']),
         ];
     }
 

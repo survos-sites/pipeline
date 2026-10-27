@@ -1,0 +1,233 @@
+{
+  "publication": "audubon-county-journal",
+  "issue": "sn87057934-1911-06-29-ed-1",
+  "page": 1,
+  "block": "TB75",
+  "group": {
+    "id": "g-d2850c1d5d9808f1c0055eb7",
+    "parentId": "column-3",
+    "column": 3,
+    "blockIds": [
+      "TB75",
+      "TB76",
+      "TB77",
+      "TB78",
+      "TB79",
+      "TB80"
+    ],
+    "basis": "proposed opening",
+    "title": "KNIGHTS OF PYTHIAS",
+    "type": null,
+    "articleId": null,
+    "roles": [
+      {
+        "id": "TB75",
+        "role": "headline",
+        "start": 0,
+        "end": 1
+      },
+      {
+        "id": "TB76",
+        "role": "subhead",
+        "start": 0,
+        "end": 3
+      },
+      {
+        "id": "TB77",
+        "role": "body",
+        "start": 0,
+        "end": 9
+      },
+      {
+        "id": "TB78",
+        "role": "body",
+        "start": 0,
+        "end": 4
+      },
+      {
+        "id": "TB79",
+        "role": "body",
+        "start": 0,
+        "end": 4
+      },
+      {
+        "id": "TB80",
+        "role": "body",
+        "start": 0,
+        "end": 9
+      }
+    ],
+    "evidence": "Display-size heading above aligned text",
+    "markdown": "## KNIGHTS OF PYTHIAS\n\n### Of Exira, Iowa, Were Entertained At The Audubon Lodge Wed day Night June 28th.\n\nTbe Knights of Pythias of Exira Lodge No. 181 were eutertained at the Audubon Lodge last oight. Giand Chancellor Dr. J. M. Cole delivered a very tine and helpful address after which Past Grand Chancellor B. I. Sallinger was called oa for a little talk and responded with an interesting speech.\n\nThe Lodge then resumed its duties and the Rank of Knighthood was conferred upon Mr. llenry I\u00a3ngle of Exira.\n\nThe evening ended with a fine two course luncheon prepared by the Audubon ladies and all partook to their stomach's content.\n\nIn tbe wee small hours of the night we bid farewell to tbe Audubon boys feeling that there was no tie that bound like \"Pythian Love.\" We sure thank the Audubon boyB for the \"Royal Good Time\" they gave us aud extend a cordial invitation to all of them to cotne and visit with ua."
+  },
+  "blocks": [
+    {
+      "page": 0,
+      "type": "paragraph",
+      "nativeType": "text",
+      "bbox": {
+        "x": 3154,
+        "y": 6368,
+        "width": 790,
+        "height": 128
+      },
+      "source": "loc-alto",
+      "id": "TB75",
+      "text": "KNIGHTS OF PYTHIAS",
+      "paragraphStarts": null,
+      "fontSize": 21,
+      "maxFontSize": 21,
+      "box": [
+        3154,
+        6368,
+        790,
+        128
+      ],
+      "confidence": 1,
+      "crop": "https://tile.loc.gov/image-services/iiif/service:ndnp:iahi:batch_iahi_miller_ver02:data:sn87057934:00415622697:1911062901:0624/pct:51.18468,72.215922,12.820513,1.451576/pct:50.632911/0/default.jpg"
+    },
+    {
+      "page": 0,
+      "type": "paragraph",
+      "nativeType": "text",
+      "bbox": {
+        "x": 3120,
+        "y": 6541,
+        "width": 854,
+        "height": 184
+      },
+      "source": "loc-alto",
+      "id": "TB76",
+      "text": "Of Exira, Iowa, Were Entertained At\nThe Audubon Lodge Wed\nday Night June 28th.",
+      "paragraphStarts": null,
+      "fontSize": 12,
+      "maxFontSize": 12,
+      "box": [
+        3120,
+        6541,
+        854,
+        184
+      ],
+      "confidence": 0.8886,
+      "crop": "https://tile.loc.gov/image-services/iiif/service:ndnp:iahi:batch_iahi_miller_ver02:data:sn87057934:00415622697:1911062901:0624/pct:50.632911,74.177818,13.859137,2.086641/pct:46.838407/0/default.jpg"
+    },
+    {
+      "page": 0,
+      "type": "paragraph",
+      "nativeType": "text",
+      "bbox": {
+        "x": 3119,
+        "y": 6768,
+        "width": 869,
+        "height": 494
+      },
+      "source": "loc-alto",
+      "id": "TB77",
+      "text": "Tbe Knights of Pythias of Exira\nLodge No. 181 were eutertained at\nthe Audubon Lodge last oight.\nGiand Chancellor Dr. J. M. Cole delivered\na very tine and helpful address\nafter which Past Grand Chancellor\nB. I. Sallinger was called oa\nfor a little talk and responded with\nan interesting speech.",
+      "paragraphStarts": null,
+      "fontSize": 9,
+      "maxFontSize": 9,
+      "box": [
+        3119,
+        6768,
+        869,
+        494
+      ],
+      "confidence": 0.9111,
+      "crop": "https://tile.loc.gov/image-services/iiif/service:ndnp:iahi:batch_iahi_miller_ver02:data:sn87057934:00415622697:1911062901:0624/pct:50.616683,76.752098,14.102564,5.602177/pct:46.029919/0/default.jpg"
+    },
+    {
+      "page": 0,
+      "type": "paragraph",
+      "nativeType": "text",
+      "bbox": {
+        "x": 3122,
+        "y": 7262,
+        "width": 868,
+        "height": 222
+      },
+      "source": "loc-alto",
+      "id": "TB78",
+      "text": "The Lodge then resumed its duties\nand the Rank of Knighthood\nwas conferred upon Mr. llenry\nI\u00a3ngle of Exira.",
+      "paragraphStarts": null,
+      "fontSize": 9,
+      "maxFontSize": 9,
+      "box": [
+        3122,
+        7262,
+        868,
+        222
+      ],
+      "confidence": 0.944,
+      "crop": "https://tile.loc.gov/image-services/iiif/service:ndnp:iahi:batch_iahi_miller_ver02:data:sn87057934:00415622697:1911062901:0624/pct:50.665368,82.354275,14.086336,2.517578/pct:46.082949/0/default.jpg"
+    },
+    {
+      "page": 0,
+      "type": "paragraph",
+      "nativeType": "text",
+      "bbox": {
+        "x": 3119,
+        "y": 7485,
+        "width": 881,
+        "height": 222
+      },
+      "source": "loc-alto",
+      "id": "TB79",
+      "text": "The evening ended with a fine two\ncourse luncheon prepared by the\nAudubon ladies and all partook to\ntheir stomach's content.",
+      "paragraphStarts": null,
+      "fontSize": 9,
+      "maxFontSize": 9,
+      "box": [
+        3119,
+        7485,
+        881,
+        222
+      ],
+      "confidence": 1,
+      "crop": "https://tile.loc.gov/image-services/iiif/service:ndnp:iahi:batch_iahi_miller_ver02:data:sn87057934:00415622697:1911062901:0624/pct:50.616683,84.883193,14.297306,2.517578/pct:45.402951/0/default.jpg"
+    },
+    {
+      "page": 0,
+      "type": "paragraph",
+      "nativeType": "text",
+      "bbox": {
+        "x": 3122,
+        "y": 7707,
+        "width": 880,
+        "height": 494
+      },
+      "source": "loc-alto",
+      "id": "TB80",
+      "text": "In tbe wee small hours of the\nnight we bid farewell to tbe Audubon\nboys feeling that there was no\ntie that bound like \"Pythian Love.\"\nWe sure thank the Audubon boyB\nfor the \"Royal Good Time\" they\ngave us aud extend a cordial invitation\nto all of them to cotne and visit\nwith ua.",
+      "paragraphStarts": null,
+      "fontSize": 9,
+      "maxFontSize": 9,
+      "box": [
+        3122,
+        7707,
+        880,
+        494
+      ],
+      "confidence": 0.9426,
+      "crop": "https://tile.loc.gov/image-services/iiif/service:ndnp:iahi:batch_iahi_miller_ver02:data:sn87057934:00415622697:1911062901:0624/pct:50.665368,87.400771,14.281078,5.602177/pct:45.454545/0/default.jpg"
+    }
+  ],
+  "pageDimensions": [
+    6162,
+    8818
+  ],
+  "region": [
+    3119,
+    6368,
+    883,
+    1833
+  ],
+  "source": "https://www.loc.gov/resource/sn87057934/1911-06-29/ed-1/?sp=1",
+  "assets": {
+    "page.jpg": "https://tile.loc.gov/image-services/iiif/service:ndnp:iahi:batch_iahi_miller_ver02:data:sn87057934:00415622697:1911062901:0624/full/pct:12.5/0/default.jpg",
+    "story.jpg": "https://tile.loc.gov/image-services/iiif/service:ndnp:iahi:batch_iahi_miller_ver02:data:sn87057934:00415622697:1911062901:0624/pct:50.616683,72.215922,14.329763,20.787027/pct:100/0/default.jpg",
+    "gsap.min.js": "https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"
+  },
+  "rasterSource": "/audubon-county-journal/sn87057934-1911-06-29-ed-1/page/1/preview.jpg",
+  "cropMethod": "CSS window onto the locally cached page raster; region is in original page coordinates."
+}
