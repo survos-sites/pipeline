@@ -1,3 +1,16 @@
-body {
-    background-color: skyblue;
-}
+body { background-color: #f5f3ee; }
+.case-intro { padding: 2rem; background: #e8ede7; border-radius: 12px; }
+.case-intro h2 { font-size: clamp(1.5rem, 3vw, 2.3rem); max-width: 36ch; margin: .7rem 0; }
+.case-intro p { max-width: 65ch; font-size: 1.05rem; }
+.case-eyebrow { color: #52665d; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.case-card { overflow: hidden; border-color: #deded5; }
+.case-preview { display: block; width: 100%; height: 260px; object-fit: contain; background: #e8e4db; padding: 1rem; }
+.case-link { font-weight: 600; }
+.case-original { display: block; width: 100%; max-height: 550px; object-fit: contain; background: #e8e4db; padding: 1rem; }
+.case-metrics { display: flex; flex-wrap: wrap; gap: 1rem 2rem; padding: 1rem 0; border-bottom: 1px solid #e8e4db; }
+.case-metrics dt { font-size: .75rem; color: #66736c; font-weight: 500; }
+.case-metrics dd { margin: .3rem 0 0; overflow-wrap: anywhere; }
+.case-output { margin-top: 1rem; padding: 1rem; background: #f7f8f5; border-radius: 6px; }
+.case-text, .case-step pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.case-step pre { max-height: 360px; overflow: auto; }
+summary { cursor: pointer; }

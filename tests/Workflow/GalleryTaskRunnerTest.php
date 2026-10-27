@@ -159,7 +159,7 @@ final class GalleryTaskRunnerTest extends TestCase
     {
         $registry = new Registry();
         $registry->addWorkflow(new Workflow(new Definition(['new'], []), new \Symfony\Component\Workflow\MarkingStore\MethodMarkingStore(true), name: SubjectFlow::WORKFLOW_NAME), new InstanceOfSupportStrategy(GalleryImage::class));
-        $data = (new GalleryController())->show($this->image, $registry);
+        $data = (new GalleryController())->show($this->image, $registry, new ClaimRunRepository($this->doctrine), $this->claims);
         self::assertSame('GalleryImage', $data['claimSubjectType']);
     }
 

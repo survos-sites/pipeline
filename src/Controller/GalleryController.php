@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\GalleryImage;
+use Survos\ClaimsBundle\Repository\ClaimRunRepository;
+use Survos\ClaimsBundle\Repository\ClaimRepository;
 use Survos\AiWorkflowBundle\Workflow\SubjectFlow;
 use Survos\WorkflowExtrasBundle\Contract\TransitionExecutorInterface;
 use Symfony\Component\Workflow\Registry;
@@ -46,10 +48,12 @@ final class GalleryController extends AbstractController
         sitemap: false,
     )]
     #[Template('gallery/show.html.twig')]
-    public function show(GalleryImage $image, Registry $registry): array
+    public function show(GalleryImage $image, Registry $registry, ClaimRunRepository $runs, ClaimRepository $claims): array
     {
         return [
             'image' => $image,
+            'runs' => $runs->findBy(['subjectType' => $image->getWorkflowSubjectType(), 'subjectId' => $image->code, 'scope' => $image->getWorkflowScope()], ['createdAt' => 'ASC']),
+            'claims' => $claims->findBy(['subjectType' => $image->getWorkflowSubjectType(), 'subjectId' => $image->code, 'scope' => $image->getWorkflowScope()], ['createdAt' => 'ASC']),
             'transitions' => $registry->get($image, SubjectFlow::WORKFLOW_NAME)->getEnabledTransitions($image),
             'claimSubjectType' => $image->getWorkflowSubjectType(),
             'claimSubjectId' => $image->code,
