@@ -1,0 +1,12 @@
+parameters:
+    letter.known_decisions: {}
+    letter.assessment_model: gpt-4o-mini
+    letter.description_model: gpt-5.4
+    letter.htr_model: gpt-4o
+    letter.metadata_model: gpt-4o-mini
+    letter.models:
+        assess_document: '%letter.assessment_model%'
+        describe_source: '%letter.description_model%'
+        htr: '%letter.htr_model%'
+        extract_metadata: '%letter.metadata_model%'
+        configuration_revision: 'openai-default-options-v1'

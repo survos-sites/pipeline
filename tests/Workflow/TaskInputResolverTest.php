@@ -45,7 +45,7 @@ final class TaskInputResolverTest extends TestCase
         $claim = self::claim('ai:ocrText', $text);
         $prepared = (new TaskInputResolver())->resolve($class::TASK, $image, [$claim], $claim->id);
         $agent = $this->createMock(AgentInterface::class);
-        $agent->expects(self::once())->method('call')->willReturnCallback(function (MessageBag $messages) use ($text, $response): ExecutionInterface {
+        $agent->expects(self::once())->method('call')->willReturnCallback(function (MessageBag $messages, array $options) use ($text, $response): ExecutionInterface {
             $prompt = $messages->getSystemMessage()->getContent();
             self::assertStringContainsString($text, $prompt);
             self::assertStringContainsString('Known provenance', $prompt);
@@ -55,7 +55,8 @@ final class TaskInputResolverTest extends TestCase
                 }
             }
             $result = $this->createStub(ExecutionInterface::class);
-            $result->method('getContent')->willReturn(json_encode($response));
+            $dto = (new \Symfony\AI\Platform\StructuredOutput\Serializer())->denormalize($response, $options['response_format']);
+            $result->method('asObject')->willReturn($dto);
             $result->method('getMetadata')->willReturn(new Metadata());
             $result->method('getRawResult')->willReturn(null);
 

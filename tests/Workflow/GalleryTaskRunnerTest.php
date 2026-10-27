@@ -55,7 +55,7 @@ final class GalleryTaskRunnerTest extends TestCase
     protected function setUp(): void
     {
         $root = dirname(__DIR__, 2);
-        $config = ORMSetup::createAttributeMetadataConfiguration([$root.'/src/Entity', $root.'/vendor/survos/claims-bundle/src/Entity'], true);
+        $config = ORMSetup::createAttributeMetadataConfig([$root.'/src/Entity', $root.'/vendor/survos/claims-bundle/src/Entity'], true);
         $config->enableNativeLazyObjects(true);
         $this->em = new EntityManager(DriverManager::getConnection(['driver' => 'pdo_sqlite', 'memory' => true]), $config);
         $this->doctrine = $this->createStub(ManagerRegistry::class);
