@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}Local image batches{% endblock %}
+{% block body %}
+<p>Import a folder, run the AI workflow, then review the evidence for each image.</p>
+<pre>php bin/console app:batch:import /path/to/photos --collection="Loan closet" --dry-run
+php bin/console app:batch:import /path/to/photos --collection="Loan closet"</pre>
+<p>Importing does not call AI. Images stay in this local application, outside the public folder.</p>
+<ul>
+{% for batch in batches %}
+<li><a href="{{ path('app_batch_show', {batch: batch.id}) }}">{{ batch.collection }}</a> · {{ batch.count }} images · {{ batch.id }}</li>
+{% else %}<li>No batches imported yet.</li>{% endfor %}
+</ul>
+<a href="{{ path('app_gallery') }}">Case studies</a>
+{% endblock %}

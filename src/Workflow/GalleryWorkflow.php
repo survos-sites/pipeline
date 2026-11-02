@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Workflow;
 
 use App\Entity\GalleryImage;
+use App\Batch\LocalImageSource;
 use Doctrine\ORM\EntityManagerInterface;
 use Survos\AiWorkflowBundle\Task\Observation\AnnotateHandwritingTask;
 use Survos\AiWorkflowBundle\Task\Observation\ObserveHiresTask;
@@ -124,17 +125,18 @@ final class GalleryWorkflow
     private function resolveThumbnailUrl(GalleryImage $image): ?string
     {
         if (!str_starts_with((string) $image->sourceUrl, 'http')) {
-            return null;
+            return $image->localOriginalPath ? (new LocalImageSource())->dataUri($image->localOriginalPath) : null;
         }
 
         return $this->imgproxy->aiThumbnail($image->sourceUrl);
     }
 
     /**
-     * TODO: use imgproxy large preset once mediary is wired up.
+     * Local originals are supplied directly; no publicly accessible image host is required.
      */
     private function resolveHighResUrl(GalleryImage $image): ?string
     {
-        return str_starts_with((string) $image->sourceUrl, 'http') ? $image->sourceUrl : null;
+        return str_starts_with((string) $image->sourceUrl, 'http') ? $image->sourceUrl
+            : ($image->localOriginalPath ? (new LocalImageSource())->dataUri($image->localOriginalPath) : null);
     }
 }

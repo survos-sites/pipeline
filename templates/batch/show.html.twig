@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ images[0].collection }}{% endblock %}
+{% block page_subtitle %}{{ images|length }} images · Batch {{ batch }}{% endblock %}
+{% block body %}
+<a href="{{ path('app_batches') }}">← All batches</a>
+<p class="mt-3">Ready to process? This command uses your configured AI providers. Refresh this page to see progress.</p>
+<pre>php bin/console app:batch:process {{ batch }}</pre>
+<p>Each photo has its own observation and analysis. Folder names preserve item groupings; multiple views are not yet combined into one inventory record.</p>
+<div class="row g-3">
+{% for image in images %}
+<div class="col-md-4"><div class="card h-100">
+<a href="{{ path('app_gallery_show', {galleryImageId: image.code}) }}"><img src="{{ path('app_batch_image', {code: image.code}) }}" alt="{{ image.title }}" class="card-img-top" loading="lazy" style="height:220px;object-fit:contain"></a>
+<div class="card-body">
+<h2 class="h4"><a href="{{ path('app_gallery_show', {galleryImageId: image.code}) }}">{{ image.title }}</a></h2>
+<p class="text-break">Group: {{ image.legacy.batch.group }}<br>{{ image.legacy.batch.path }}</p>
+<p>{{ image.marking == 'prepared' ? 'Ready for observation' : image.marking|capitalize }}</p>
+<a href="{{ path('app_gallery_show', {galleryImageId: image.code}) }}">Review image and AI evidence</a>
+</div></div></div>
+{% endfor %}
+</div>
+{% endblock %}

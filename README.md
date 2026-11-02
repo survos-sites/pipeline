@@ -6,6 +6,22 @@ A Symfony application that demonstrates [`survos/ai-pipeline-bundle`](https://pa
 
 ---
 
+## Local folder batches
+
+For the local hackathon application, start with a directory of photos rather than a camera UI.
+Flysystem imports private image snapshots; the existing Symfony AI workflow records observation
+and analysis claims for review at `/batches`.
+
+```bash
+php bin/console app:batch:import /path/to/photos --collection="Medical loan closet" --dry-run
+php bin/console app:batch:import /path/to/photos --collection="Medical loan closet"
+php bin/console app:batch:process BATCH_ID
+```
+
+Import makes no AI calls. Processing uses the configured providers and runs synchronously, so
+no separate queue worker or public image server is needed. See [local batch setup and behavior](docs/local-batches.md)
+for a Composer + SQLite installation, folder grouping, limits, and the remaining inventory work.
+
 ## Symfony gallery setup
 
 The Symfony routes `/` and `/gallery` read `GalleryImage` records from the database. The committed image manifest alone does not populate that table. After installing dependencies and configuring the application database, apply the application's migrations and import the demo rows:

@@ -2,6 +2,7 @@
 {% block page_title %}{{ image.title }}{% endblock %}
 {% block page_subtitle %}{{ image.collection ?? 'Source collection not recorded' }}{% endblock %}
 {% block body %}
+{% if image.legacy.batch is defined %}<a href="{{ path('app_batch_show', {batch: image.legacy.batch.id}) }}" class="d-inline-block mb-4 me-3">← Back to collection batch</a>{% endif %}
 <a href="{{ path('app_gallery') }}" class="d-inline-block mb-4">← All case studies</a>
 <div class="row g-4">
     <aside class="col-lg-4">

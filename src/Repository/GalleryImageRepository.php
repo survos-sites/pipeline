@@ -17,4 +17,11 @@ final class GalleryImageRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, GalleryImage::class);
     }
+    /** @return list<GalleryImage> */
+    public function findBatch(string $batch): array
+    {
+        // Keep the first local demo portable across SQLite and PostgreSQL.
+        return array_values(array_filter($this->findBy([], ['title' => 'ASC']),
+            static fn (GalleryImage $image): bool => ($image->legacy['batch']['id'] ?? null) === $batch));
+    }
 }

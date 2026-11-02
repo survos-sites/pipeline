@@ -191,6 +191,31 @@ final class GalleryTaskRunnerTest extends TestCase
         self::assertSame(['analyze' => ['generate_title', 'summarize', 'extract_metadata']], $this->image->pendingSteps);
     }
 
+    public function testLocalOriginalReachesVisionTaskWithoutPublicHosting(): void
+    {
+        $bytes = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aE9sAAAAASUVORK5CYII=');
+        $path = tempnam(sys_get_temp_dir(), 'local-vision-');
+        file_put_contents($path, $bytes);
+        try {
+            $this->image->sourceUrl = '/batches/images/local';
+            $this->image->localOriginalPath = $path;
+            $task = $this->task('observe', function (WorkflowSubjectInterface $subject) use ($bytes): TaskResult {
+                self::assertSame('data:image/png;base64,'.base64_encode($bytes), $subject->getWorkflowImageUrl());
+
+                return new TaskResult([new RawClaim('ai:observation', 'A test image')]);
+            });
+            $registry = $this->registry(['observe' => $task]);
+            $runner = new GalleryTaskRunner($registry, new TaskInputResolver(), $this->claims, $this->ingestor);
+            $workflow = new GalleryWorkflow($this->em, $runner, $registry, new ImgproxyUrlBuilder('https://images.example.org'));
+            $this->image->addPendingStep('observe', 'observe');
+            $workflow->onObserve(new TransitionEvent($this->image, new Marking(['prepared' => 1])));
+            self::assertNull($this->image->resolvedImageUrl);
+            self::assertSame(0, $this->image->pendingCount('observe'));
+        } finally {
+            unlink($path);
+        }
+    }
+
     private function task(string $name, callable $run): TaskInterface
     {
         $task = $this->createMock(TaskInterface::class);
