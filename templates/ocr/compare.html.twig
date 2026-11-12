@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}OCR comparison{% endblock %}
+{% block body %}
+<p>Upload one image; each OCR engine configured on this machine reads it. Paid engines run only when ticked.</p>
+
+<form method="post" enctype="multipart/form-data" class="mb-4">
+    <input type="file" name="image" accept="image/png,image/jpeg,image/webp,image/tiff" required>
+    <label class="ms-3"><input type="checkbox" name="include_paid" value="1"{{ includePaid ? ' checked' }}> include paid engines</label>
+    <button type="submit" class="btn btn-primary ms-3">Run OCR</button>
+</form>
+
+<p class="text-muted small">
+    Engines here: {% for e in engines %}{{ e.label }}{{ e.paid ? ' ($)' }}{{ not loop.last ? ' · ' }}{% else %}none{% endfor %}.
+    {% if skipped %}Not configured: {% for e in skipped %}{{ e.label }}{{ not loop.last ? ', ' }}{% endfor %}.{% endif %}
+</p>
+
+{% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+
+{% if results %}
+<div class="row">
+    {% if imageData %}
+    <div class="col-md-4 mb-3"><img src="{{ imageData }}" alt="Uploaded image" class="img-fluid border"></div>
+    {% endif %}
+    <div class="{{ imageData ? 'col-md-8' : 'col-12' }}">
+        <div class="row">
+        {% for r in results %}
+            <div class="col-lg-{{ results|length > 2 ? 4 : 6 }} mb-3">
+                <h4>{{ r.label }}</h4>
+                <div class="small text-muted mb-1">{{ r.milliseconds }} ms · {{ r.characters }} characters</div>
+                {% if r.error %}
+                    <div class="alert alert-warning">{{ r.error }}</div>
+                {% else %}
+                    <pre style="white-space: pre-wrap" class="border p-2">{{ r.text }}</pre>
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

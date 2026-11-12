@@ -21,3 +21,29 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # OCR comparison page (/ocr). A blank URL/key leaves an engine out.
+    ocr.rusto:
+        class: App\Ocr\MistralCompatibleEngine
+        arguments:
+            $id: rusto
+            $label: 'rusto PP-OCRv6 Tiny (local)'
+            $baseUrl: '%env(OCR_RUSTO_URL)%'
+        tags: ['app.ocr_engine']
+
+    ocr.mistral:
+        class: App\Ocr\MistralCompatibleEngine
+        arguments:
+            $id: mistral
+            $label: 'Mistral OCR (paid)'
+            $baseUrl: 'https://api.mistral.ai'
+            $apiKey: '%env(MISTRAL_API_KEY)%'
+            $requiresKey: true
+            $paid: true
+        tags: ['app.ocr_engine']
+
+    ocr.figmark:
+        class: App\Ocr\FigmarkEngine
+        arguments:
+            $figmarkDir: '%env(FIGMARK_DIR)%'
+        tags: ['app.ocr_engine']
